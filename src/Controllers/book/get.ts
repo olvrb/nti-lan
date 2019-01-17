@@ -23,10 +23,11 @@ export async function BookGetHandler(
     else {
         res.render("book", {
             seatsio: {
-                publicKey: Configuration.Web.SeatsIO.PublicKey,
-                eventKey: Configuration.Web.SeatsIO.EventKey
+                publicKey: Configuration.SeatsIO.PublicKey,
+                eventKey: Configuration.SeatsIO.EventKey
             },
-            title: Configuration.Web.Site.Title
+            title: Configuration.Web.Site.Title,
+            user: { name: req.user.Name, surname: req.user.surname }
         });
     }
 }

@@ -25,7 +25,6 @@
       integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
       crossorigin="anonymous"
     ></script>
-    <script src="/public/javascripts/book.js"></script>
     <script src="https://cdn.seatsio.net/chart.js"></script>
     <script>
       new seatsio.SeatingChart({
@@ -42,20 +41,29 @@
   </head>
 
   <body>
+    <h1>Hej <%= user.name %></h1>
     <div class="container">
       <div class="map"><div id="seats"></div></div>
-      <div class="mdc-text-field mdc-text-field--outlined">
-        <input type="text" id="tf-outlined" class="mdc-text-field__input" />
-        <div class="mdc-notched-outline">
-          <div class="mdc-notched-outline__leading"></div>
-          <div class="mdc-notched-outline__notch">
-            <label for="tf-outlined" class="mdc-floating-label"
-              >Klass/Person du känner</label
-            >
+      <form action="/book" method="post" id="form">
+        <div class="mdc-text-field mdc-text-field--outlined">
+          <input
+            name="referrer"
+            type="text"
+            id="tf-outlined"
+            class="mdc-text-field__input"
+          />
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <label for="tf-outlined" class="mdc-floating-label"
+                >Klass/Person du känner</label
+              >
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
           </div>
-          <div class="mdc-notched-outline__trailing"></div>
         </div>
-      </div>
+      </form>
     </div>
+    <script src="/javascripts/book.js"></script>
   </body>
 </html>
