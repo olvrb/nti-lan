@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title><% title %></title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+      integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
+    />
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+      integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/public/javascripts/book.js"></script>
+    <script src="https://cdn.seatsio.net/chart.js"></script>
+    <script>
+      new seatsio.SeatingChart({
+        divId: "seats",
+        publicKey: "<%= seatsio.publicKey %>",
+        event: "<%= seatsio.eventKey %>",
+        maxSelectedObjects: 1,
+        tooltipEnabled: false,
+        response: true,
+        maintainAspectRatio: false
+      }).render();
+    </script>
+    <link rel="stylesheet" href="/stylesheets/book.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="map"><div id="seats"></div></div>
+      <div class="mdc-text-field mdc-text-field--outlined">
+        <input type="text" id="tf-outlined" class="mdc-text-field__input" />
+        <div class="mdc-notched-outline">
+          <div class="mdc-notched-outline__leading"></div>
+          <div class="mdc-notched-outline__notch">
+            <label for="tf-outlined" class="mdc-floating-label"
+              >Klass/Person du känner</label
+            >
+          </div>
+          <div class="mdc-notched-outline__trailing"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

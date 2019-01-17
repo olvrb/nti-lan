@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/stylesheets/signup.css" />
+    <title><% title %></title>
+  </head>
+
+  <body>
+    <h1>signup</h1>
+    <div class="container">
+      <form action="/auth/signup" method="post">
+        <input
+          class="input-field"
+          placeholder="E-mail"
+          type="email"
+          name="email"
+          id="email"
+        />
+        <input
+          class="input-field"
+          placeholder="Lösenord"
+          type="password"
+          name="password"
+          id="password"
+        />
+        <input
+          class="input-field"
+          placeholder="Personnummer (ÅÅMMDD-XXXX)"
+          type="text"
+          name="nationalId"
+          id="nationalId"
+        />
+        <input
+          class="input-field"
+          placeholder="Förnamn"
+          type="text"
+          name="name"
+          id="name"
+        />
+        <input
+          class="input-field"
+          placeholder="Efternamn"
+          type="text"
+          name="surname"
+          id="surname"
+        />
+        <input
+          class="input-field"
+          placeholder="Telefonnummer (0712345678)"
+          type="tel"
+          name="phone"
+          id="phone"
+        />
+        <input
+          class="input-field"
+          placeholder="Telefonnummer till anhörig, för din säkerhet."
+          type="tel"
+          name="adultPhone"
+          id="adultPhone"
+        />
+        <input
+          class="input-field"
+          placeholder="Adress"
+          type="text"
+          name="address"
+          id="address"
+        />
+        <input
+          class="input-field"
+          placeholder="Postkod"
+          type="text"
+          name="postcode"
+          id="postcode"
+        />
+        <input
+          class="input-field"
+          placeholder="Postort"
+          type="text"
+          name="city"
+          id="city"
+        />
+        <button class="input-field" type="submit">submit</button>
+      </form>
+    </div>
+  </body>
+</html>

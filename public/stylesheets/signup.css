@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 300px;
+}
+
+.input-field {
+    display:block;
+    margin: 2em;
+}
+input {
+    width: 40em;
+}
