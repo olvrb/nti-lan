@@ -8,6 +8,7 @@ import { SignupPostHandler } from "./auth/signup/post";
 import { BookGetHandler } from "./book/get";
 import { BookPostHandler } from "./book/post";
 import { E404Handler } from "./error/404";
+import { AdminBookingsGetHandler } from "./admin/bookings";
 
 export function BindControllers() {
     Logger.info("Binding controllers.");
@@ -25,9 +26,7 @@ export function BindControllers() {
 
     app.get("/auth/logout", LogoutGetHandler);
 
-    // app.get("/api/v1/items", ItemHandler);
-    // app.post("/api/v1/items/create", CreateItemHandler);
-    // app.post("/api/v1/categories/create", CreateCategoryHandler);
+    app.get("/admin/bookings", AdminBookingsGetHandler);
 
     app.use(E404Handler);
 }

@@ -20,7 +20,6 @@ export async function SignupPostHandler(
     res: Response,
     next: NextFunction
 ) {
-    console.log(req.body);
     const {
         email,
         password,
@@ -68,6 +67,9 @@ export async function SignupPostHandler(
     user.Address = address;
     user.Postcode = postcode;
     user.City = city;
+    user.Bookings = [];
+    user.AccessLevel = "pleb";
+
     try {
         await user.save();
     } catch (error) {

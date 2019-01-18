@@ -11,7 +11,7 @@ export class Booking extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     public Id: string;
 
-    @ManyToOne((type) => User, (user) => user.Bookings)
+    @ManyToOne((type) => User, (user) => user.Bookings, { eager: true })
     public User: User;
 
     @Column()

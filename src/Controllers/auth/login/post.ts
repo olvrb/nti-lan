@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import passport from "passport";
+import { Logger } from "@utilities/Logger";
 
 /**
  * @api {post} /auth/login
@@ -19,7 +20,13 @@ export async function LoginPostHandler(
     res: Response,
     next: NextFunction
 ) {
+    Logger.info("inside post");
+
     passport.authenticate("local", (err, user, info) => {
+        if (!user) {
+            return res.redirect("/auth/login");
+        }
+
         if (err) {
             return res.status(500).json({ error: "internal server error" });
         }
@@ -30,4 +37,5 @@ export async function LoginPostHandler(
             return res.redirect("/book");
         });
     })(req, res, next);
+    // res.send("<a href='/auth/login'> fel lösen eller email </a>");
 }

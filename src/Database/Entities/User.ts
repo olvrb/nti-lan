@@ -20,11 +20,15 @@ export class User extends BaseEntity {
             where: { email }
         });
         if (user === undefined) {
+            done(null, false, { message: "invalid email or password" });
             return Logger.info("Login rejected.");
         }
         if (email === user.Email && compareSync(password, user.Password)) {
             Logger.debug("User authenticated.");
             return done(null, user);
+        } else {
+            done(null, false, { message: "invalid email or password" });
+            return Logger.info("Invalid password");
         }
     }
 
@@ -37,7 +41,7 @@ export class User extends BaseEntity {
     }
 
     public static ValidatePassword(password: string) {
-        return password.length > 8;
+        return password.length >= 8;
     }
 
     public static ValidateNationalId(nationalId: string) {
@@ -95,6 +99,9 @@ export class User extends BaseEntity {
     @Column()
     public City: string;
 
-    @OneToMany((type) => Booking, (booking) => booking.User)
+    @OneToMany((type) => Booking, (booking) => booking.User, { lazy: true })
     public Bookings: Booking[];
+
+    @Column()
+    public AccessLevel: "admin" | "pleb";
 }
