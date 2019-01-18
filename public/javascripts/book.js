@@ -1,18 +1,35 @@
 window.seat = seatsio;
+const SearchTextField = new mdc.textField.MDCTextField(
+    document.querySelector(".mdc-text-field")
+);
+
+const dialog = new mdc.dialog.MDCDialog(document.querySelector(".mdc-dialog"));
+let hasConfirmed = false;
 
 const form = document.querySelector("#form");
 
-form.onsubmit = () => {
-    if (!seatsio.charts[0].selectedObjects[0]) return alert("Välj en seat.");
-    appendHtml(form, "<input name='seat' id='seat'>");
-    const newChild = document.querySelector("#seat");
-    newChild.value = seatsio.charts[0].selectedObjects[0];
-};
+dialog.listen("MDCDialog:closed", (obj) => {
+    console.log(obj);
 
-function appendHtml(el, str) {
-    var div = document.createElement("div");
-    div.innerHTML = str;
-    while (div.children.length > 0) {
-        el.appendChild(div.children[0]);
+    if (obj.detail.action === "close") {
+        hasConfirmed = false;
+        return;
+    } else {
+        hasConfirmed = true;
+        const newChild = document.querySelector("#seat");
+        newChild.value = seatsio.charts[0].selectedObjects[0];
+        form.submit();
     }
-}
+});
+form.onsubmit = () => {
+    if (hasConfirmed) {
+        return true;
+    } else {
+        const seat = seatsio.charts[0].selectedObjects[0];
+        document.querySelector("#my-dialog-content").innerHTML = `Plats: ${
+            seat ? seat : "endast entré."
+        }<br>Pris: ${seat ? 60 : 30}`;
+        dialog.open();
+        return false;
+    }
+};

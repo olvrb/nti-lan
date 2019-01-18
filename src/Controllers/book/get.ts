@@ -27,7 +27,7 @@ export async function BookGetHandler(
                 eventKey: Configuration.SeatsIO.EventKey
             },
             title: Configuration.Web.Site.Title,
-            user: { name: req.user.Name, surname: req.user.surname }
+            user: { name: req.user.Name, surname: req.user.Surname }
         });
     }
 }

@@ -1,41 +1,39 @@
 *,
 body,
 html {
-  background-color: #444;
-  color: #eee;
+    background-color: #444;
+    color: #eee;
 }
 
 :root {
-  --mdc-theme-primary: #7289da;
-  --mdc-theme-secondary: #eee;
-  --mdc-theme-background: #36393e !important;
-  --mdc-text-field-outline-color: #eee !important;
+    --mdc-theme-primary: #7289da;
+    --mdc-theme-secondary: #eee;
+    --mdc-theme-background: #36393e !important;
+    --mdc-text-field-outline-color: #eee !important;
 }
 
 .mdc-button--outlined {
-  --mdc-theme-primary: #353535;
+    --mdc-theme-primary: #353535;
 }
 
 input,
 select,
 textarea {
-  color: #eee !important;
+    color: #eee !important;
 }
 
 .mdc-text-field {
-  color: #eee;
-  border-color: #eee !important;
+    color: #eee;
+    border-color: #eee !important;
 }
 
 .mdc-floating-label {
-  color: #acbdbd !important;
+    color: #acbdbd !important;
 }
-
 
 h1 {
-  font-size: 4em;
+    font-size: 4em;
 }
-
 
 .container {
     display: flex;
@@ -43,6 +41,6 @@ h1 {
 }
 
 .map {
-    width: 40%;
-    height: 40%;
+    width: 50%;
+    height: 50%;
 }

@@ -27,7 +27,7 @@ export async function LoginPostHandler(
             if (err) {
                 return res.status(500).json({ error: "internal server error" });
             }
-            return res.send({message: "successfully logged in"});
+            return res.redirect("/book");
         });
     })(req, res, next);
 }

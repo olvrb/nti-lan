@@ -24,6 +24,10 @@ export async function BookPostHandler(
     if (!req.user) return res.redirect("/");
     const seat = req.body.seat;
     const referrer = req.body.referrer;
+    const booking = new Booking();
+    booking.Paid = false;
+    booking.User = req.user;
+
     if (seat) {
         // Book seat
         try {
@@ -36,16 +40,23 @@ export async function BookPostHandler(
                 }
             ]);
         } catch (error) {
-            Logger.error(error);
-            return res.status(500).send("failed to reserve seat");
+            Logger.error(JSON.stringify(error));
+            return res
+                .status(500)
+                .send("failed to reserve seat, probably already reserved.");
         }
-        const booking = new Booking();
-        booking.Paid = false;
         booking.SeatId = seat;
         booking.Type = "seat";
-        booking.User = req.user;
+        booking.Price = 60;
     } else {
-        // TODO: write this, save user
-        // Don't book seat
+        booking.SeatId = "";
+        booking.Type = "entry";
+        booking.Price = 30;
     }
+    await booking.save();
+    return res.send(
+        `Bokad plats ${
+            booking.Type === "seat" ? booking.SeatId : "(ingen plats)"
+        } av ${booking.User.Name}`
+    );
 }

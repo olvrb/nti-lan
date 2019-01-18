@@ -18,7 +18,7 @@ export class Booking extends BaseEntity {
     public Type: "entry" | "seat";
 
     @Column()
-    public price: number;
+    public Price: number;
 
     @Column()
     public SeatId: string;

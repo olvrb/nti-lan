@@ -3,14 +3,29 @@ import passport from "passport";
 import { Configuration } from "@config";
 
 /**
- * @api {post} /auth/login
- * @apiName Login.
- * @apiPermission anyone
- * @apiGroup anyone
+ * @api {get} /user/:id Request User information
+ * @apiName GetUser
+ * @apiGroup User
  *
+ * @apiParam {Number} id Users unique ID.
  *
- * @apiSuccess (200) {Object} { success: true }
- * @apiFail (500) {Object} { success: false }
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "firstname": "John",
+ *       "lastname": "Doe"
+ *     }
+ *
+ * @apiError UserNotFound The id of the User was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "UserNotFound"
+ *     }
  */
 export async function LoginGetHandler(
     req: Request,
@@ -20,5 +35,5 @@ export async function LoginGetHandler(
     if (req.user) {
         return res.redirect("/book");
     }
-    res.render("login", { title: Configuration.Web.Site.Title });
+    res.render("auth/login", { title: Configuration.Web.Site.Title });
 }

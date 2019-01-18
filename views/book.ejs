@@ -34,17 +34,34 @@
         maxSelectedObjects: 1,
         tooltipEnabled: false,
         response: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        onObjectMouseOver: obj => {
+          const seatInfo = document.querySelector(".seatInfo");
+          if (obj.status === "booked") {
+            console.log(obj);
+
+            seatInfo.innerHTML = `Plats ${obj.id} är upptagen av ${
+              obj.extraData.name
+            }`;
+          } else {
+            seatInfo.innerHTML = `Plats ${obj.id} är ledig.`;
+          }
+        },
+        onObjectSelected: obj => {
+          const newChild = document.querySelector("#seat");
+          newChild.value = obj.id;
+        }
       }).render();
     </script>
     <link rel="stylesheet" href="/stylesheets/book.css" />
   </head>
 
   <body>
-    <h1>Hej <%= user.name %></h1>
     <div class="container">
       <div class="map"><div id="seats"></div></div>
+      <p class="seatInfo">Välj en plats.</p>
       <form action="/book" method="post" id="form">
+        <input hidden name="seat" id="seat" />
         <div class="mdc-text-field mdc-text-field--outlined">
           <input
             name="referrer"
@@ -62,7 +79,33 @@
             <div class="mdc-notched-outline__trailing"></div>
           </div>
         </div>
+        <input type="submit" value="submit" />
       </form>
+            <h1>Hej
+                <%= `${user.name} ${user.surname}` %>
+            </h1>
+
+    <div class="mdc-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title" aria-describedby="my-dialog-content">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface">
+                <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
+                <h2 class="mdc-dialog__title" id="my-dialog-title">
+                    Är du säker på att du vill boka?
+                </h2>
+                <div class="mdc-dialog__content" id="my-dialog-content">
+                    
+                </div>
+                <footer class="mdc-dialog__actions">
+                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
+                        <span class="mdc-button__label">Avbryt</span>
+                    </button>
+                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="accept">
+                        <span class="mdc-button__label">Ja</span>
+                    </button>
+                </footer>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
     </div>
     <script src="/javascripts/book.js"></script>
   </body>
