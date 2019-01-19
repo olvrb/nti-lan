@@ -22,20 +22,34 @@ export async function BookingRemovePostHandler(
     next: NextFunction
 ) {
     if (!req.user) return res.redirect("/");
-    if (req.user.AccessLevel !== "admin") return res.redirect("/");
-    console.log(req.body);
+    if (req.user.AccessLevel === "admin") {
+        const booking = await Booking.findOne({
+            where: { Id: req.body.booking }
+        });
 
-    const booking = await Booking.findOne({ where: { Id: req.body.booking } });
+        if (booking === undefined) {
+            return res.json({ message: "invalid booking" });
+        }
 
-    if (booking === undefined) return res.json({ message: "invalid booking" });
+        if (booking.Type === "seat") {
+            await client.events.release(
+                Configuration.SeatsIO.EventKey,
+                booking.SeatId
+            );
+            console.log("removing seat");
+        }
+        await booking.remove();
+        return res.redirect("/admin/bookings");
+    } else {
+        console.log(req.body);
 
-    if (booking.Type === "seat") {
-        await client.events.release(
-            Configuration.SeatsIO.EventKey,
-            booking.SeatId
-        );
-        console.log("removing seat");
+        const booking = await Booking.findOne({
+            where: { User: req.user, Id: req.body.booking }
+        });
+        if (booking === undefined) {
+            return res.json({ message: "invalid booking" });
+        }
+        await booking.remove();
+        return res.redirect("/user/bookings");
     }
-    await booking.remove();
-    return res.redirect("/admin/bookings");
 }

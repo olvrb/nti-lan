@@ -16,8 +16,10 @@
         />
         <title>Document</title>
     </head>
+
     <body>
         <%- include("../header") %>
+
         <h1>bookings</h1>
         <table>
             <tr>
@@ -28,34 +30,9 @@
             </tr>
             <% for (const book of bookings) { %>
             <tr>
-                <td><%= `${book.User.Name} ${book.User.Surname}` %></td>
                 <td><%= book.Type %></td>
                 <td><%= book.SeatId ? book.SeatId : "-" %></td>
                 <td><%= book.Paid ? "ja" : "nej" %></td>
-                <% if (!book.Paid) { %>
-                <td>
-                    <form
-                        id="markPaid"
-                        action="/api/v1/bookings/paid"
-                        method="post"
-                    >
-                        <input
-                            hidden
-                            type="text"
-                            name="booking"
-                            id=""
-                            value="<%= book.Id %>"
-                        />
-                        <input
-                            name="reason"
-                            type="text"
-                            placeholder="anledning"
-                        />
-                        <button type="submit">Markera som betald</button>
-                    </form>
-                </td>
-
-                <% } %>
                 <td>
                     <form
                         id="removeBooking"
@@ -68,6 +45,13 @@
                             name="booking"
                             id=""
                             value="<%= book.Id %>"
+                        />
+                        <input
+                            hidden
+                            type="text"
+                            name="userId"
+                            id=""
+                            value="<%= book.User.Id %>"
                         />
                         <button type="submit">avboka</button>
                     </form>
