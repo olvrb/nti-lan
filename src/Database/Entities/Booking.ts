@@ -25,4 +25,7 @@ export class Booking extends BaseEntity {
 
     @Column()
     public Paid: boolean;
+
+    @Column()
+    public SwishId: string;
 }

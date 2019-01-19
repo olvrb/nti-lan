@@ -20,7 +20,6 @@ export async function AdminBookingsGetHandler(req: Request, res: Response) {
     if (req.user.AccessLevel !== "admin") return res.redirect("/");
     else {
         const bookings = await Booking.find();
-        console.log(bookings);
 
         // We don't mind passing the user's password, as these objects are only used server-side.
         res.render("admin/bookings", {

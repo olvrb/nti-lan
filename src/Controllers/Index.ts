@@ -11,6 +11,7 @@ import { E404Handler } from "./error/404";
 import { AdminBookingsGetHandler } from "./admin/bookings";
 import { BookingRemovePostHandler } from "./api/v1/bookings/remove";
 import { IndexHandler } from "./Index.controller";
+import { BookingPaidPostHandler } from "./api/v1/bookings/paid";
 
 export function BindControllers() {
     Logger.info("Binding controllers.");
@@ -31,6 +32,7 @@ export function BindControllers() {
     app.get("/admin/bookings", AdminBookingsGetHandler);
 
     app.post("/api/v1/bookings/remove", BookingRemovePostHandler);
+    app.post("/api/v1/bookings/paid", BookingPaidPostHandler);
 
     app.use(E404Handler);
 }

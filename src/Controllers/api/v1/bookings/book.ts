@@ -27,6 +27,7 @@ export async function BookPostHandler(
     const booking = new Booking();
     booking.Paid = false;
     booking.User = req.user;
+    booking.SwishId = "";
 
     console.log(seat);
 
