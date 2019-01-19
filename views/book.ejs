@@ -60,7 +60,7 @@
     <div class="container">
       <div class="map"><div id="seats"></div></div>
       <p class="seatInfo">Välj en plats.</p>
-      <form action="/book" method="post" id="form">
+      <form action="/api/v1/bookings/book" method="post" id="form">
         <input hidden name="seat" id="seat" />
         <div class="mdc-text-field mdc-text-field--outlined">
           <input
