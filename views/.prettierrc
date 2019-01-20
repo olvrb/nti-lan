@@ -4,7 +4,7 @@
     "useTabs": false,
     "arrowParens": "always",
     "bracketSpacing": true,
-    "parser": "html",
     "semi": true,
-    "trailingComma": "none"
+    "trailingComma": "none",
+    "parser": "html"
 }

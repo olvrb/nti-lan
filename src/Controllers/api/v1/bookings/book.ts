@@ -22,6 +22,10 @@ export async function BookPostHandler(
     next: NextFunction
 ) {
     if (!req.user) return res.redirect("/");
+
+    if ((await req.user.Bookings).length >= 2) {
+        return res.json({ message: "unable to book more than two times." });
+    }
     const seat = req.body.seat;
     const referrer = req.body.referrer;
     const booking = new Booking();
