@@ -19,6 +19,9 @@ export class User extends BaseEntity {
         const user = await User.findOne({
             where: { email }
         });
+        console.log(user);
+        console.log(email);
+
         if (user === undefined) {
             done(null, false, { message: "invalid email or password" });
             return Logger.info("Login rejected.");
