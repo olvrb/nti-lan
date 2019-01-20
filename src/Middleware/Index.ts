@@ -17,7 +17,7 @@ import { LoggerMiddleware } from "./Logger/Index";
 
 export function BindMiddleware() {
     Logger.info("Binding middleware.");
-
+    app.enable("trust proxy");
     app.use(LoggerMiddleware);
     app.use(
         session({
