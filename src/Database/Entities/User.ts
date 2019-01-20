@@ -17,7 +17,7 @@ export class User extends BaseEntity {
     }
     public static async Authenticate(email: string, password: string, done) {
         const user = await User.findOne({
-            where: { email }
+            where: { Email: email }
         });
         console.log(user);
         console.log(email);
