@@ -19,7 +19,7 @@ export async function BookGetHandler(
     res: Response,
     next: NextFunction
 ) {
-    if (!req.user) return res.redirect("/");
+    if (!req.user) return res.redirect("/auth/login");
     else {
         res.render("book", {
             seatsio: {

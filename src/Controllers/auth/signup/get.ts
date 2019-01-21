@@ -20,7 +20,9 @@ export async function SignupGetHandler(
     if (req.user) {
         return res.redirect("/book");
     }
-    res.render("auth/signup", {
-        title: Configuration.Web.Site.Title
+    res.render("redesign/auth/signup", {
+        title: Configuration.Web.Site.Title,
+        path: req.path,
+        isLoggedIn: false
     });
 }

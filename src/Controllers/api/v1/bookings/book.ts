@@ -59,9 +59,5 @@ export async function BookPostHandler(
         booking.Price = 30;
     }
     await booking.save();
-    return res.send(
-        `Bokad plats ${
-            booking.Type === "seat" ? booking.SeatId : "(ingen plats)"
-        } av ${booking.User.Name}`
-    );
+    return res.redirect("/user/bookings");
 }

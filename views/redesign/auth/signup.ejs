@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title><%= title %></title>
+        <%- include("../bootstrap") %>
+    </head>
+
+    <body>
+        <%- include("../topbar") %>
+        <h2 class="col-auto">Skapa ett konto</h1>
+
+
+        <form action="/auth/signup" method="post">
+            <div class="form-group col-7">
+                <label for="exampleInputEmail1">Email address</label>
+                <input
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter email"
+                    name="email"
+                />
+                <small id="emailHelp" class="form-text text-muted"
+                    >Vi delar aldrig med din email till någon annan.</small
+                >
+            </div>
+            <div class="form-group col-7">
+                <label for="passwordInput">Lösenord</label>
+                <input
+                    type="password"
+                    class="form-control"
+                    id="passwordInput"
+                    aria-describedby="passwordHelp"
+                    placeholder="Lösenord"
+                    name="email"
+                />
+                <small id="passwordHelp" class="form-text text-muted"
+                    >Ditt lösenord är enkrypterat på våra servrar och skickas via https.</small
+                >
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-2">
+                    Logga In
+                </button>
+            </div>
+        </form>
+    </body>
+</html>
