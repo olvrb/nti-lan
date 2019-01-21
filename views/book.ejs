@@ -38,8 +38,6 @@
         onObjectMouseOver: obj => {
           const seatInfo = document.querySelector(".seatInfo");
           if (obj.status === "booked") {
-            console.log(obj);
-
             seatInfo.innerHTML = `Plats ${obj.id} är upptagen av ${
               obj.extraData.name
             }`;

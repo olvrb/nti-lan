@@ -1,13 +1,14 @@
 // tslint:disable-next-line
 require("module-alias/register");
-import express from "express";
-import { json, urlencoded } from "body-parser";
-import { join } from "path";
 import { Configuration } from "@config";
-import { connect } from "./Database/Index";
+import { Logger } from "@utilities/Logger";
+import express from "express";
+import { join } from "path";
+
 import { BindControllers } from "./Controllers/Index";
+import { connect } from "./Database/Index";
 import { BindMiddleware } from "./Middleware/Index";
-import passport = require("passport");
+
 const app = express();
 
 app.set("view engine", "ejs");
@@ -20,8 +21,8 @@ connect()
         BindMiddleware();
         BindControllers();
         app.listen(port, () => {
-            console.log(`Listening on port ${port}: http://localhost:${port}`);
+            Logger.info(`Listening on port ${port}: http://localhost:${port}`);
         });
     })
-    .catch(console.error);
+    .catch(Logger.error);
 export { app };

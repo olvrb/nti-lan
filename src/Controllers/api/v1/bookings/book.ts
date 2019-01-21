@@ -33,13 +33,7 @@ export async function BookPostHandler(
     booking.User = req.user;
     booking.SwishId = "";
 
-    console.log(seat);
-
     if (seat !== "undefined") {
-        console.log(seat);
-
-        console.log("book seat");
-
         // Book seat
         try {
             await client.events.book(Configuration.SeatsIO.EventKey, [
@@ -60,8 +54,6 @@ export async function BookPostHandler(
         booking.Type = "seat";
         booking.Price = 60;
     } else {
-        console.log("no book seat");
-
         booking.SeatId = "";
         booking.Type = "entry";
         booking.Price = 30;

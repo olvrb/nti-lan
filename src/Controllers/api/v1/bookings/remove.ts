@@ -36,13 +36,10 @@ export async function BookingRemovePostHandler(
                 Configuration.SeatsIO.EventKey,
                 booking.SeatId
             );
-            console.log("removing seat");
         }
         await booking.remove();
         return res.redirect("/admin/bookings");
     } else {
-        console.log(req.body);
-
         const booking = await Booking.findOne({
             where: { User: req.user, Id: req.body.booking }
         });

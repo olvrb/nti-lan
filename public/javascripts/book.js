@@ -9,8 +9,6 @@ let hasConfirmed = false;
 const form = document.querySelector("#form");
 
 dialog.listen("MDCDialog:closed", (obj) => {
-    console.log(obj);
-
     if (obj.detail.action === "close") {
         hasConfirmed = false;
         return;
