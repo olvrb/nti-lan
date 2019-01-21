@@ -46,6 +46,10 @@ export async function BookingRemovePostHandler(
         if (booking === undefined) {
             return res.json({ message: "invalid booking" });
         }
+        await client.events.release(
+            Configuration.SeatsIO.EventKey,
+            booking.SeatId
+        );
         await booking.remove();
         return res.redirect("/user/bookings");
     }
