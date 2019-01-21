@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/">
         <img
             src="/img/ntig_logo_vit.png"
             width="40"
@@ -52,28 +52,23 @@
             </li>
         </ul>
         <div class="signin form-inline my-2 my-lg-0">
-            <% if (!isLoggedIn && path !== "/auth/login") { %>
-
-            <a href="/auth/login">
-                <button class="btn btn-outline-success my-2 my-sm-0 mr-sm-2">
-                    Logga In
-                </button>
+            <% if (isLoggedIn) { %>
+            <a href="/auth/logout">
+                <button class="btn btn-primary my-2 my-sm-0">Logga Ut</button>
             </a>
 
             <% } else if (path !== "/auth/login") { %>
-
-            <a href="/auth/logout">
-                <button class="btn btn-outline-success my-2 my-sm-0">
-                    Logga Ut
+            <a href="/auth/login">
+                <button class="btn btn-primary my-2 my-sm-0 mr-sm-2">
+                    Logga In
                 </button>
             </a>
-
             <% } %>
         </div>
         <% if (!isLoggedIn && path !== "/auth/signup") { %>
         <div class="signin form-inline my-2 my-lg-0">
             <a href="/auth/signup">
-                <button class="btn btn-outline-success my-2 my-sm-0">
+                <button class="btn btn-primary my-2 my-sm-0">
                     Skapa ett konto
                 </button>
             </a>

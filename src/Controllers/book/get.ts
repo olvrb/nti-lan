@@ -21,11 +21,13 @@ export async function BookGetHandler(
 ) {
     if (!req.user) return res.redirect("/auth/login");
     else {
-        res.render("book", {
+        res.render("redesign/book", {
             seatsio: {
                 publicKey: Configuration.SeatsIO.PublicKey,
                 eventKey: Configuration.SeatsIO.EventKey
             },
+            path: req.path,
+            isLoggedIn: true,
             title: Configuration.Web.Site.Title,
             user: { name: req.user.Name, surname: req.user.Surname }
         });

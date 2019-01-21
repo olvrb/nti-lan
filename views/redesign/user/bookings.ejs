@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title><%= title %></title>
+        <%- include("../bootstrap") %>
+    </head>
+
+    <body>
+        <%- include("../topbar") %>
+        <h2 class="col-auto">Mina bokningar</h2>
+        <table class="table table-borderless table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Namn</th>
+                    <th scope="col">Biljetttyp</th>
+                    <th scope="col">Sittplats</th>
+                    <th scope="col">Betald</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (const book of bookings) { %>
+                <tr>
+                    <td><%= `${book.User.Name} ${book.User.Surname}` %></td>
+                    <td><%= book.Type %></td>
+                    <td><%= book.SeatId ? book.SeatId : "-" %></td>
+                    <td><%= book.Paid ? "ja" : "nej" %></td>
+                    <td>
+                        <form
+                            id="removeBooking"
+                            action="/api/v1/bookings/remove"
+                            method="post"
+                        >
+                            <input
+                                hidden
+                                type="text"
+                                name="booking"
+                                id=""
+                                value="<%= book.Id %>"
+                            />
+                            <input
+                                hidden
+                                type="text"
+                                name="userId"
+                                id=""
+                                value="<%= book.User.Id %>"
+                            />
+                            <button class="btn btn-danger" type="submit">
+                                avboka
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </body>
+</html>

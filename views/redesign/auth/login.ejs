@@ -9,7 +9,7 @@
     </head>
     <body>
         <%- include("../topbar") %>
-        <h2 class="col-auto">Logga In</h1>
+        <h2 class="col-auto">Logga In</h2>
         <form action="/auth/login" method="post">
             <div class="form-group col-7">
                 <label for="exampleInputEmail1">Email address</label>
@@ -38,5 +38,10 @@
                 </button>
             </div>
         </form>
+        <div class="col-auto">
+            <a href="/auth/signup" class="btn btn-secondary mb-2"
+                >Skapa ett konto</a
+            >
+        </div>
     </body>
 </html>

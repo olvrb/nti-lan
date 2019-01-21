@@ -22,6 +22,7 @@ export async function BookPostHandler(
     next: NextFunction
 ) {
     if (!req.user) return res.redirect("/");
+    console.log(req.body);
 
     if ((await req.user.Bookings).length >= 2) {
         return res.json({ message: "unable to book more than two times." });
@@ -33,7 +34,7 @@ export async function BookPostHandler(
     booking.User = req.user;
     booking.SwishId = "";
 
-    if (seat !== "undefined") {
+    if (seat !== "") {
         // Book seat
         try {
             await client.events.book(Configuration.SeatsIO.EventKey, [
