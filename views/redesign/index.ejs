@@ -4,10 +4,54 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <script src="https://cdn.seatsio.net/chart.js"></script>
         <%- include("bootstrap") %>
+        <script>      
+            new seatsio.SeatingChart({
+                divId: "seats",
+                publicKey: "<%= seatsio.publicKey %>",
+                event: "<%= seatsio.eventKey %>",
+                maxSelectedObjects: 0,
+                tooltipEnabled: false,
+                response: false,
+                maintainAspectRatio: false
+            }).render();</script>
         <title><%= title %></title>
     </head>
     <body>
         <%- include("topbar") %>
+
+        <div style="margin-top: 1rem;" class="container h-100">
+            <div class="row h-100 justify-content-center align-items-center card-deck">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header"><h4>Turneringar</h1></div>
+                    
+                    <ul class="list-group list-group-flush">
+                        <% for (const game of games) { %>
+                            <li class="list-group-item"><%= game %></li>
+                        <% } %>
+                    </ul>
+                    <div class="card-body">
+                        <p class="card-text">
+                            Some quick example text to build on the card title
+                            and make up the bulk of the card's content.
+                        </p>
+                        <a href="#" class="btn btn-primary">Gå med i turnering</a>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header">
+                        <h4>Platskarta</h1>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            Logga in för att boka.
+                        </p>
+                        <div style="width: 75%; height: auto;" id="seats"></div>
+                        <a href="/book" class="btn btn-primary">Boka plats</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
