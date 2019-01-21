@@ -35,7 +35,7 @@ export async function LoginGetHandler(
     if (req.user) {
         return res.redirect("/book");
     }
-    res.render("redesign/auth/login", {
+    res.render("auth/login", {
         title: Configuration.Web.Site.Title,
         path: req.path,
         isLoggedIn: false

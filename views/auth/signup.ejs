@@ -4,88 +4,139 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <link rel="stylesheet" href="/stylesheets/signup.css" />
-        <title><% title %></title>
+        <title><%= title %></title>
+        <%- include("../bootstrap") %>
     </head>
 
     <body>
-        <%- include("../header") %>
+        <%- include("../topbar") %>
+        <h2 class="col-auto">Skapa ett konto</h1>
 
-        <h1>signup</h1>
-        <div class="container">
-            <form action="/auth/signup" method="post">
+
+        <form action="/auth/signup" method="post">
+            <div class="form-group col-7">
+                <label for="exampleInputEmail1">Email adress</label>
                 <input
-                    class="input-field"
-                    placeholder="E-mail"
                     type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Email"
                     name="email"
-                    id="email"
                 />
+                <small id="emailHelp" class="form-text text-muted"
+                    >Vi delar aldrig ut din email till någon annan.</small
+                >
+            </div>
+
+            <div class="form-group col-7">
+                <label for="passwordInput">Lösenord</label>
                 <input
-                    class="input-field"
-                    placeholder="Lösenord"
                     type="password"
+                    class="form-control"
+                    id="passwordInput"
+                    aria-describedby="passwordHelp"
+                    placeholder="Lösenord"
                     name="password"
-                    id="password"
                 />
+                <small id="passwordHelp" class="form-text text-muted"
+                    >Ditt lösenord är enkrypterat på våra servrar och skickas via https.</small
+                >
+            </div>
+
+            <div class="form-group col-7">
+                <label for="nationalIdInput">Personnummer</label>
                 <input
-                    class="input-field"
-                    placeholder="Personnummer (ÅÅMMDD-XXXX)"
                     type="text"
+                    class="form-control"
+                    id="nationalIdInput"
+                    placeholder="ÅÅMMDD-XXXX"
                     name="nationalId"
-                    id="nationalId"
                 />
+            </div>
+
+             <div class="form-group col-7">
+                <label for="nameInput">Förnamn</label>
                 <input
-                    class="input-field"
+                    type="text"
+                    class="form-control"
+                    id="nameInput"
                     placeholder="Förnamn"
-                    type="text"
                     name="name"
-                    id="name"
                 />
+            </div>
+
+            <div class="form-group col-7">
+                <label for="surnameInput">Efternamn</label>
                 <input
-                    class="input-field"
+                    type="text"
+                    class="form-control"
+                    id="surnameInput"
                     placeholder="Efternamn"
-                    type="text"
                     name="surname"
-                    id="surname"
                 />
+            </div>
+
+            <div class="form-group col-7">
+                <label for="telInput">Telefonnummer</label>
                 <input
-                    class="input-field"
-                    placeholder="Telefonnummer (0712345678)"
                     type="tel"
+                    class="form-control"
+                    id="telInput"
+                    placeholder="0712345678"
                     name="phone"
-                    id="phone"
                 />
+            </div>
+
+             <div class="form-group col-7">
+                <label for="adultPhone">Telefonnummer till anhörig</label>
                 <input
-                    class="input-field"
-                    placeholder="Telefonnummer till anhörig, för din säkerhet."
                     type="tel"
-                    name="adultPhone"
+                    class="form-control"
                     id="adultPhone"
+                    placeholder="0712345678"
+                    name="adultPhone"
                 />
+            </div>
+
+            <div class="form-group col-7">
+                <label for="addressInput">Adress</label>
                 <input
-                    class="input-field"
-                    placeholder="Adress"
                     type="text"
+                    class="form-control"
+                    id="addressInput"
+                    placeholder="Hantverkargatan 1"
                     name="address"
-                    id="address"
                 />
+            </div>
+
+            <div class="form-group col-7">
+                <label for="postcodeInput">Postnummer</label>
                 <input
-                    class="input-field"
-                    placeholder="Postkod"
                     type="text"
+                    class="form-control"
+                    id="postcodeInput"
+                    placeholder="11266"
                     name="postcode"
-                    id="postcode"
                 />
+            </div>
+
+            <div class="form-group col-7">
+                <label for="cityInput">Postort</label>
                 <input
-                    class="input-field"
-                    placeholder="Postort"
                     type="text"
+                    class="form-control"
+                    id="cityInput"
+                    placeholder="Stockholm"
                     name="city"
-                    id="city"
                 />
-                <button class="input-field" type="submit">submit</button>
-            </form>
-        </div>
+            </div>
+
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-2">
+                    Skapa konto
+                </button>
+            </div>
+        </form>
     </body>
 </html>

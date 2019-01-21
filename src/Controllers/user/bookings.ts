@@ -21,7 +21,7 @@ export async function UserBookingsGetHandler(req: Request, res: Response) {
         const bookings = await Booking.find({ where: { User: req.user } });
 
         // We don't mind passing the user's password, as these objects are only used server-side.
-        res.render("redesign/user/bookings", {
+        res.render("user/bookings", {
             title: Configuration.Web.Site.Title,
             path: req.path,
             isLoggedIn: true,

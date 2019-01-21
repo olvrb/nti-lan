@@ -1,111 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title><% title %></title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-      integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
-    />
-    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
-      integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdn.seatsio.net/chart.js"></script>
-    <script>
-      new seatsio.SeatingChart({
-        divId: "seats",
-        publicKey: "<%= seatsio.publicKey %>",
-        event: "<%= seatsio.eventKey %>",
-        maxSelectedObjects: 1,
-        tooltipEnabled: false,
-        response: true,
-        maintainAspectRatio: false,
-        onObjectMouseOver: obj => {
-          const seatInfo = document.querySelector(".seatInfo");
-          if (obj.status === "booked") {
-            seatInfo.innerHTML = `Plats ${obj.id} är upptagen av ${
-              obj.extraData.name
-            }`;
-          } else {
-            seatInfo.innerHTML = `Plats ${obj.id} är ledig.`;
-          }
-        },
-        onObjectSelected: obj => {
-          const newChild = document.querySelector("#seat");
-          newChild.value = obj.id;
-        }
-      }).render();
-    </script>
-    <link rel="stylesheet" href="/stylesheets/book.css" />
-  </head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title><%= title %></title>
+        <script src="https://cdn.seatsio.net/chart.js"></script>
+        <script>
+            new seatsio.SeatingChart({
+                divId: "seats",
+                publicKey: "<%= seatsio.publicKey %>",
+                event: "<%= seatsio.eventKey %>",
+                maxSelectedObjects: 1,
+                onObjectMouseOver: (obj) => {
+                    const seatInfo = document.querySelector("#seatInfo");
+                    if (obj.status === "booked") {
+                        seatInfo.innerHTML = `Plats ${obj.id} är upptagen av ${
+                            obj.extraData.name
+                        }`;
+                    } else {
+                        seatInfo.innerHTML = `Plats ${obj.id} är ledig.`;
+                    }
+                },
+                onObjectSelected: (obj) => {
+                    const newChild = document.querySelector("#seat");
+                    newChild.value = obj.id;
+                }
+            }).render();
+        </script>
+        <%- include("bootstrap") %>
+    </head>
 
-  <body>
-    <%- include("header") %>
-    <div class="container">
-      <div class="map"><div id="seats"></div></div>
-      <p class="seatInfo">Välj en plats.</p>
-      <form action="/api/v1/bookings/book" method="post" id="form">
-        <input hidden name="seat" id="seat" />
-        <div class="mdc-text-field mdc-text-field--outlined">
-          <input
-            name="referrer"
-            type="text"
-            id="tf-outlined"
-            class="mdc-text-field__input"
-          />
-          <div class="mdc-notched-outline">
-            <div class="mdc-notched-outline__leading"></div>
-            <div class="mdc-notched-outline__notch">
-              <label for="tf-outlined" class="mdc-floating-label"
-                >Klass/Person du känner</label
-              >
-            </div>
-            <div class="mdc-notched-outline__trailing"></div>
-          </div>
-        </div>
-        <input type="submit" value="submit" />
-      </form>
-            <h1>Hej
-                <%= `${user.name} ${user.surname}` %>
-            </h1>
+    <body>
+        <%- include("topbar") %>
+        <div style="margin-top: 1rem;" class="container">
+            <div class="row align-items-center card-deck">
+                <div class="card">
+                    <div class="card-header"><h4>Sittplats</h4></div>
+                    <div class="card-body">
+                        <p id="seatInfo" class="card-text">
+                            Håll musen över en plats för att se mer information
+                        </p>
+                        <form
+                            action="/api/v1/bookings/book"
+                            method="post"
+                            id="form"
+                        >
+                            <input hidden name="seat" id="seat" />
+                        </form>
+                        <button
+                            id="submit"
+                            data-toggle="modal"
+                            data-target="#confirmModal"
+                            type="submit"
+                            class="btn btn-primary"
+                        >
+                            Boka plats
+                        </button>
 
-    <div class="mdc-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title" aria-describedby="my-dialog-content">
-        <div class="mdc-dialog__container">
-            <div class="mdc-dialog__surface">
-                <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
-                <h2 class="mdc-dialog__title" id="my-dialog-title">
-                    Är du säker på att du vill boka?
-                </h2>
-                <div class="mdc-dialog__content" id="my-dialog-content">
-                    
+                        <div
+                            class="mx-auto"
+                            style="height: auto; width: 50%; transform: rotate(0deg)"
+                            id="seats"
+                        ></div>
+                    </div>
                 </div>
-                <footer class="mdc-dialog__actions">
-                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
-                        <span class="mdc-button__label">Avbryt</span>
-                    </button>
-                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="accept">
-                        <span class="mdc-button__label">Ja</span>
-                    </button>
-                </footer>
             </div>
         </div>
-        <div class="mdc-dialog__scrim"></div>
-    </div>
-    <script src="/javascripts/book.js"></script>
-  </body>
+
+        <div id="confirmModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal"
+                        >
+                            Nej
+                        </button>
+                        <button
+                            id="submitConfirm"
+                            type="button"
+                            class="btn btn-primary"
+                        >
+                            Ja
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/javascripts/new/book.js"></script>
+    </body>
 </html>

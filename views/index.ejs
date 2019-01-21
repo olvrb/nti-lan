@@ -4,23 +4,54 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Placeholder</title>
+        <script src="https://cdn.seatsio.net/chart.js"></script>
+        <%- include("bootstrap") %>
+        <script>      
+            new seatsio.SeatingChart({
+                divId: "seats",
+                publicKey: "<%= seatsio.publicKey %>",
+                event: "<%= seatsio.eventKey %>",
+                maxSelectedObjects: 0,
+                tooltipEnabled: false,
+            }).render();</script>
+        <title><%= title %></title>
     </head>
     <body>
-        <% if (isAdmin) { %>
-        <h1><a href="/admin/bookings">admin</a></h1>
+        <%- include("topbar") %>
 
-        <% } %> <% if (!isLoggedIn) { %>
+        <div style="margin-top: 1rem;" class="container">
+            <div class="row align-items-center card-deck">
+                <div class="card">
+                    <div class="card-header"><h4>Turneringar</h4></div>
+                    
+                    <ul class="list-group list-group-flush">
+                        <% for (const game of games) { %>
+                            <li class="list-group-item"><%= game %></li>
+                        <% } %>
+                    </ul>
+                    <div class="card-body">
+                        <p class="card-text">
+                            Some quick example text to build on the card title
+                            and make up the bulk of the card's content.
+                        </p>
+                        <a href="#" class="btn btn-primary">Gå med i turnering</a>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 1rem;" class="row align-items-center card-deck">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Generell Information</h1>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            Some quick example text to build on the card title
+                            and make up the bulk of the card's content.
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-        <h1><a href="/auth/login">login</a></h1>
-        <h1><a href="/auth/signup">signup</a></h1>
-
-        <% } %> <% if (isLoggedIn) { %>
-
-        <h1><a href="/user/bookings">my bookings</a></h1>
-        <h1><a href="/book">book</a></h1>
-        <br />
-        <h1><a href="/auth/logout">logout</a></h1>
-        <% } %>
+        </div>
     </body>
 </html>

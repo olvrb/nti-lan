@@ -20,6 +20,6 @@ export async function LogoutGetHandler(
     if (req.user && req.session) {
         req.session.destroy((err) => err);
         req.logout();
-        return res.redirect("/auth/login");
+        return res.redirect("/");
     }
 }

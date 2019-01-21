@@ -21,7 +21,7 @@ export async function BookGetHandler(
 ) {
     if (!req.user) return res.redirect("/auth/login");
     else {
-        res.render("redesign/book", {
+        res.render("book", {
             seatsio: {
                 publicKey: Configuration.SeatsIO.PublicKey,
                 eventKey: Configuration.SeatsIO.EventKey
