@@ -37,5 +37,4 @@ export async function LoginPostHandler(
             return res.redirect("/book");
         });
     })(req, res, next);
-    // res.send("<a href='/auth/login'> fel lösen eller email </a>");
 }

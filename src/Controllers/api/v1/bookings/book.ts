@@ -22,7 +22,6 @@ export async function BookPostHandler(
     next: NextFunction
 ) {
     if (!req.user) return res.redirect("/");
-    console.log(req.body);
 
     if ((await req.user.Bookings).length >= 2) {
         return res.json({ message: "unable to book more than two times." });
