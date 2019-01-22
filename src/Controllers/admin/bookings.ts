@@ -25,7 +25,10 @@ export async function AdminBookingsGetHandler(req: Request, res: Response) {
         res.render("admin/bookings", {
             title: Configuration.Web.Site.Title,
             user: { name: req.user.Name, surname: req.user.Surname },
-            bookings
+            bookings,
+            path: req.path,
+            isLoggedIn: true,
+            isAdmin: req.user.AccessLevel === "admin"
         });
     }
 }

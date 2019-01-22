@@ -5,7 +5,8 @@ import {
     Column,
     Entity,
     OneToMany,
-    PrimaryGeneratedColumn
+    PrimaryGeneratedColumn,
+    OneToOne
 } from "typeorm";
 
 import { Booking } from "./Booking";
@@ -66,6 +67,9 @@ export class User extends BaseEntity {
 
     @Column()
     public Email: string;
+
+    @Column()
+    public EmailIsVerified: boolean;
 
     @Column()
     public Password: string;

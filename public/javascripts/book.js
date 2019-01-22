@@ -1,33 +1,36 @@
-window.seat = seatsio;
-const SearchTextField = new mdc.textField.MDCTextField(
-    document.querySelector(".mdc-text-field")
-);
-
-const dialog = new mdc.dialog.MDCDialog(document.querySelector(".mdc-dialog"));
 let hasConfirmed = false;
+$("#confirmModal").on("hide.bs.modal", (e) => {
+    console.log(e);
+    if (e.type === "hide") return;
 
-const form = document.querySelector("#form");
-
-dialog.listen("MDCDialog:closed", (obj) => {
-    if (obj.detail.action === "close") {
-        hasConfirmed = false;
-        return;
-    } else {
-        hasConfirmed = true;
-        const newChild = document.querySelector("#seat");
-        newChild.value = seatsio.charts[0].selectedObjects[0];
-        form.submit();
-    }
+    hasConfirmed = true;
 });
-form.onsubmit = () => {
-    if (hasConfirmed) {
-        return true;
-    } else {
-        const seat = seatsio.charts[0].selectedObjects[0];
-        document.querySelector("#my-dialog-content").innerHTML = `Plats: ${
-            seat ? seat : "endast entré."
-        }<br>Pris: ${seat ? 60 : 30}`;
-        dialog.open();
+
+$("#submit").click((e) => {
+    const modalInfo = document.querySelector("#modalInfo");
+    const seatInfo = document.querySelector("#seat");
+
+    console.log(seatInfo.value);
+    modalInfo.innerHTML = `Sittplats: ${
+        seatInfo.value ? seatInfo.value : "ingen vald"
+    }`;
+    modalInfo.innerHTML += `<br/>Pris: ${seatInfo.value ? 60 : 30}kr`;
+});
+
+$("#form").submit((e) => {
+    if (!hasConfirmed) {
+        // modalInfo.innerHTML = `Sittplats: ${
+        //     seat.value ? obj.id : "ingen vald"
+        // }.\nPris: ${obj}`;
+        console.log("has not confirmed");
+
+        e.preventDefault();
         return false;
     }
-};
+});
+
+$("#submitConfirm").click((e) => {
+    console.log("submitting form bcs confirm");
+    hasConfirmed = true;
+    $("#form").submit();
+});

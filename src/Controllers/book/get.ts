@@ -29,7 +29,8 @@ export async function BookGetHandler(
             path: req.path,
             isLoggedIn: true,
             title: Configuration.Web.Site.Title,
-            user: { name: req.user.Name, surname: req.user.Surname }
+            user: { name: req.user.Name, surname: req.user.Surname },
+            isAdmin: req.user.AccessLevel === "admin"
         });
     }
 }

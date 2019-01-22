@@ -38,6 +38,7 @@ export async function LoginGetHandler(
     res.render("auth/login", {
         title: Configuration.Web.Site.Title,
         path: req.path,
-        isLoggedIn: false
+        isLoggedIn: false,
+        isAdmin: false
     });
 }

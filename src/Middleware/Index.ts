@@ -31,7 +31,10 @@ export function BindMiddleware() {
                 ) as unknown) as Repository<SessionEntity>
             }),
             saveUninitialized: true,
-            cookie: { httpOnly: false }
+            cookie: {
+                httpOnly: false,
+                maxAge: 60 * 60 * 24 // 24 hours.
+            }
         })
     );
     app.use(json()); // for parsing application/json

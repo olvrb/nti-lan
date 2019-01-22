@@ -25,7 +25,8 @@ export async function UserBookingsGetHandler(req: Request, res: Response) {
             title: Configuration.Web.Site.Title,
             path: req.path,
             isLoggedIn: true,
-            bookings
+            bookings,
+            isAdmin: req.user.AccessLevel === "admin"
         });
     }
 }

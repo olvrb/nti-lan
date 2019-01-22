@@ -23,6 +23,7 @@ export async function SignupGetHandler(
     res.render("auth/signup", {
         title: Configuration.Web.Site.Title,
         path: req.path,
-        isLoggedIn: false
+        isLoggedIn: false,
+        isAdmin: false
     });
 }

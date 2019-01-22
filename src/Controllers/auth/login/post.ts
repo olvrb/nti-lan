@@ -24,7 +24,7 @@ export async function LoginPostHandler(
 
     passport.authenticate("local", (err, user, info) => {
         if (!user) {
-            return res.redirect("/auth/login");
+            return res.redirect("/auth/login?loginError");
         }
 
         if (err) {

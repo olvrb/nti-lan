@@ -29,6 +29,18 @@
             <li class="nav-item <%= path === '/book' ? 'active' : ''  %>">
                 <a class="nav-link " href="/book">Boka plats</a>
             </li>
+            <% console.log(isLoggedIn); if (isLoggedIn) { %>
+            <li
+                class="nav-item <%= path === '/user/bookings' ? 'active' : '' %>"
+            >
+                <a
+                    href="<%= isAdmin ? '/admin/bookings' : '/user/bookings' %>"
+                    class="nav-link"
+                >
+                    <%= isAdmin ? 'Alla bokningar ' : 'Mina bokningar' %>
+                </a>
+            </li>
+            <% } %>
             <li class="nav-item dropdown">
                 <a
                     class="nav-link dropdown-toggle"
@@ -47,7 +59,7 @@
                     >
                     <a class="dropdown-item" href="#">Another action</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="mailto:???">Email</a>
                 </div>
             </li>
         </ul>

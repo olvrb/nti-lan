@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { Category } from "@entities/Category";
 import passport = require("passport");
 import { User } from "@entities/User";
+import { Logger } from "@utilities/Logger";
 
 /**
  * @api {post} /auth/login
@@ -53,7 +54,7 @@ export async function SignupPostHandler(
     }
     const oldUser = await User.findOne({ where: { Email: email } });
     if (oldUser !== undefined) {
-        return res.status(409).json({ error: "email already registered" });
+        return res.redirect("/auth/signup?invalidForm");
     }
 
     const user = new User();
@@ -69,10 +70,12 @@ export async function SignupPostHandler(
     user.City = city;
     user.Bookings = [];
     user.AccessLevel = "pleb";
+    user.EmailIsVerified = false;
 
     try {
         await user.save();
     } catch (error) {
+        Logger.error(JSON.stringify(error));
         return res.status(500).send("internal server error, please try again");
     }
     return res.redirect("/book");
