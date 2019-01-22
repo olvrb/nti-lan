@@ -50,7 +50,7 @@ Mark a booking as paid. Redirects to /admin/bookings if success.
     "reason": "123456789"
 }
 ```
-
+---
 
 ### **POST** /api/v1/bookings/remove auth
 
@@ -68,3 +68,4 @@ Remove a booking. Redirects to /user/bookings if success.
     "booking": "uid"
 }
 ```
+---
