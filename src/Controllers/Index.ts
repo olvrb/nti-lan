@@ -13,6 +13,7 @@ import { BookGetHandler } from "./book/get";
 import { E404Handler } from "./error/404";
 import { IndexHandler } from "./Index.controller";
 import { UserBookingsGetHandler } from "./user/bookings";
+import { Configuration } from "@config";
 
 export function BindControllers() {
     Logger.info("Binding controllers.");
@@ -38,4 +39,18 @@ export function BindControllers() {
     app.post("/api/v1/bookings/paid", BookingPaidPostHandler);
 
     app.use(E404Handler);
+    app.use((err, req, res, next) => {
+        if (err) {
+            console.log(err);
+
+            // res.send(err.message);
+            return res.render("error", {
+                path: req.path,
+                title: Configuration.Web.Site.Title,
+                isAdmin: req.user ? req.user.AccessLevel === "admin" : false,
+                isLoggedIn: req.user ? true : false,
+                error: err.message
+            });
+        }
+    });
 }

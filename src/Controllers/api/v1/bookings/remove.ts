@@ -28,7 +28,7 @@ export async function BookingRemovePostHandler(
         });
 
         if (booking === undefined) {
-            return res.json({ message: "invalid booking" });
+            return next(new Error("Ogiltig bokning."));
         }
 
         if (booking.Type === "seat") {
@@ -44,7 +44,7 @@ export async function BookingRemovePostHandler(
             where: { User: req.user, Id: req.body.booking }
         });
         if (booking === undefined) {
-            return res.json({ message: "invalid booking" });
+            return next(new Error("Ogiltig bokning."));
         }
         if (booking.Type === "seat") {
             await client.events.release(
