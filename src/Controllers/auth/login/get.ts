@@ -1,6 +1,5 @@
-import { NextFunction, Request, Response } from "express";
-import passport from "passport";
 import { Configuration } from "@config";
+import { NextFunction, Request, Response } from "express";
 
 /**
  * @api {get} /user/:id Request User information

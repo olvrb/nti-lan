@@ -1,9 +1,6 @@
-import { NextFunction, Request, Response } from "express";
-import passport from "passport";
-import { Logger } from "@utilities/Logger";
 import { Booking } from "@entities/Booking";
-import SeatsioClient from "seatsio";
-import { Configuration } from "@config";
+import { NextFunction, Request, Response } from "express";
+
 /**
  * @api {post} /auth/login
  * @apiName Login.

@@ -34,7 +34,11 @@ export async function LoginPostHandler(
             if (err) {
                 return res.status(500).json({ error: "internal server error" });
             }
-            return res.redirect("/book");
+            console.log(req.user);
+            console.log("redirecting to /book...");
+            process.nextTick(() => {
+                return res.redirect("/book");
+            });
         });
     })(req, res, next);
 }
