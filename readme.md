@@ -52,7 +52,7 @@ Mark a booking as paid. Redirects to /admin/bookings if success.
 ```
 ---
 
-### **POST** /api/v1/bookings/remove auth
+### **POST** `/api/v1/bookings/remove` auth
 
 Remove a booking. Redirects to /user/bookings if success.
 
@@ -69,3 +69,64 @@ Remove a booking. Redirects to /user/bookings if success.
 }
 ```
 ---
+
+### **POST** `/auth/login`
+
+Login with email and password. Redirects to /book if success, else to `/auth/login?loginError`.
+
+#### Parameters
+- `email`: Email.
+- `password`: Password.
+
+#### Example Request
+
+**Content-Type:** `application/json`
+
+```json
+{
+    "email": "example@example.com",
+    "password": "123456789"
+}
+```
+---
+
+### **GET** `/auth/signout`
+
+Sign out. Redirects to /auth/login.
+
+---
+
+### **POST** `/auth/signup`
+
+Sign up as a new user. Redirects to /auth/login.
+
+#### Parameters
+- `email`: Email.
+- `password`: Password
+- `nationalId`: National ID/SSN/Personnummer in format `YYMMDD-XXXX`
+- `name`: Name.
+- `surname`: Surname.
+- `phone`: Phone number in format `0712345678`
+- `adultPhone`: Adult phone number.
+- `address`: Address.
+- `postcode`: Postcode.
+- `city`: City.
+
+#### Example Request
+
+**Content-Type:** `application/json`
+
+```json
+{
+    "email": "example@example.com",
+    "password": "123456789",
+    "nationalId": "970425-XXXX",
+    "name": "John",
+    "surname": "Doe",
+    "phone": "0712345678",
+    "adultPhone": "0712345678",
+    "address": "Hantverkargatan 1",
+    "postcode": "11266",
+    "city": "Stockholm"
+}
+```
