@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { Category } from "@entities/Category";
 import { User } from "@entities/User";
 import { Configuration } from "@config";
 

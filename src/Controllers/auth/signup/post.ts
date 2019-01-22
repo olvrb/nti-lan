@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { Category } from "@entities/Category";
 import passport = require("passport");
 import { User } from "@entities/User";
 import { Logger } from "@utilities/Logger";

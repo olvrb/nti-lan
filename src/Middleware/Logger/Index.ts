@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { Logger } from "../../Utilities/Logger";
+import { Logger } from "@utilities/Logger";
 export async function LoggerMiddleware(
     req: Request,
     res: Response,

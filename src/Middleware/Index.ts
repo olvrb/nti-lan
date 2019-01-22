@@ -3,7 +3,6 @@ import { Session } from "@entities/Session";
 import { json, urlencoded } from "body-parser";
 import express from "express";
 import session from "express-session";
-import Swagger from "express-swagger";
 import passport = require("passport");
 import { join } from "path";
 import { getConnection, Repository } from "typeorm";
@@ -33,7 +32,7 @@ export function BindMiddleware() {
             saveUninitialized: true,
             cookie: {
                 httpOnly: false,
-                maxAge: 60 * 60 * 24 // 24 hours.
+                maxAge: 60 * 60 * 24 * 1000 // 24 hours.
             }
         })
     );

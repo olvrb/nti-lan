@@ -29,7 +29,7 @@
             <li class="nav-item <%= path === '/book' ? 'active' : ''  %>">
                 <a class="nav-link " href="/book">Boka plats</a>
             </li>
-            <% console.log(isLoggedIn); if (isLoggedIn) { %>
+            <% if (isLoggedIn) { %>
             <li
                 class="nav-item <%= path === '/user/bookings' ? 'active' : '' %>"
             >

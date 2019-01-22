@@ -1,17 +1,17 @@
 import { app } from "../Index";
 import { Logger } from "../Utilities/Logger";
+import { AdminBookingsGetHandler } from "./admin/bookings";
+import { BookPostHandler } from "./api/v1/bookings/book";
+import { BookingPaidPostHandler } from "./api/v1/bookings/paid";
+import { BookingRemovePostHandler } from "./api/v1/bookings/remove";
 import { LoginGetHandler } from "./auth/login/get";
 import { LoginPostHandler } from "./auth/login/post";
 import { LogoutGetHandler } from "./auth/logout/get";
 import { SignupGetHandler } from "./auth/signup/get";
 import { SignupPostHandler } from "./auth/signup/post";
 import { BookGetHandler } from "./book/get";
-import { BookPostHandler } from "./api/v1/bookings/book";
 import { E404Handler } from "./error/404";
-import { AdminBookingsGetHandler } from "./admin/bookings";
-import { BookingRemovePostHandler } from "./api/v1/bookings/remove";
 import { IndexHandler } from "./Index.controller";
-import { BookingPaidPostHandler } from "./api/v1/bookings/paid";
 import { UserBookingsGetHandler } from "./user/bookings";
 
 export function BindControllers() {

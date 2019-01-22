@@ -1,10 +1,6 @@
-import { Request, Response, NextFunction } from "express";
-import { Category } from "@entities/Category";
-import passport = require("passport");
-import { User } from "@entities/User";
 import { Configuration } from "@config";
-import { Logger } from "@utilities/Logger";
 import { Booking } from "@entities/Booking";
+import { Request, Response } from "express";
 
 /**
  * @api {get} /auth/login
