@@ -11,7 +11,7 @@ export async function AuthMiddleware(
     passport.use(
         new LocalStrategy({ usernameField: "email" }, User.Authenticate)
     );
-    passport.serializeUser((user: any, done) => {
+    passport.serializeUser((user: User, done) => {
         done(null, user.Id);
     });
     passport.deserializeUser(async (id, done) => {

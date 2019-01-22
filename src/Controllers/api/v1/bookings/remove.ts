@@ -1,9 +1,9 @@
-import { NextFunction, Request, Response } from "express";
-import passport from "passport";
-import { Logger } from "@utilities/Logger";
-import { Booking } from "@entities/Booking";
-import SeatsioClient from "seatsio";
 import { Configuration } from "@config";
+import { Booking } from "@entities/Booking";
+import { NextFunction, Request, Response } from "express";
+import SeatsioClient from "seatsio";
+import { Logger } from "@utilities/Logger";
+
 const client = new SeatsioClient(Configuration.SeatsIO.PrivateKey);
 /**
  * @api {post} /auth/login
@@ -46,10 +46,13 @@ export async function BookingRemovePostHandler(
         if (booking === undefined) {
             return res.json({ message: "invalid booking" });
         }
-        await client.events.release(
-            Configuration.SeatsIO.EventKey,
-            booking.SeatId
-        );
+        if (booking.Type === "seat") {
+            await client.events.release(
+                Configuration.SeatsIO.EventKey,
+                booking.SeatId
+            );
+        }
+
         await booking.remove();
         return res.redirect("/user/bookings");
     }
