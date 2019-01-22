@@ -28,6 +28,7 @@ Create a booking. Redirects to /user/bookings if success.
     "seat": "A-1-3"
 }
 ```
+---
 
 ### **POST** `/api/v1/bookings/paid` auth admin
 
