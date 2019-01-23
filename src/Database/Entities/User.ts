@@ -16,6 +16,7 @@ const mailgunClient = Mailgun({
 });
 
 import { Booking } from "./Booking";
+import { Request } from "express";
 
 @Entity()
 export class User extends BaseEntity {
@@ -120,18 +121,37 @@ export class User extends BaseEntity {
     public AccessLevel: "admin" | "pleb";
 
     public async SendEmail(message: string) {
-        mailgunClient.messages().send(
-            {
-                from: Configuration.Mail.From,
-                to: this.Email,
-                subject: "NTI LAN",
-                text: message
-            },
-            (error, body) => {
-                if (error) Logger.error(error);
-                console.log(body);
+        return new Promise<{ id: string; message: string }>(
+            (resolve, reject) => {
+                mailgunClient.messages().send(
+                    {
+                        from: Configuration.Mail.From,
+                        to: this.Email,
+                        subject: "NTI LAN",
+                        text: message
+                    },
+                    (error, body) => {
+                        if (error) return reject(error);
+                        resolve(body);
+                    }
+                );
+                return true;
             }
         );
-        return true;
+    }
+
+    public async ResendVerificationEmail(req: Request) {
+        if (this.EmailIsVerified) return new Error("Email already verified");
+        return new Promise<{ id: string; message: string }>(
+            (resolve, reject) => {
+                this.SendEmail(
+                    `Verifiera din email adress: ${req.protocol}://${
+                        req.hostname
+                    }/api/v1/email/verify?token=${this.EmailVerificationToken}`
+                )
+                    .then(resolve)
+                    .catch(reject);
+            }
+        );
     }
 }

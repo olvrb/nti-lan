@@ -15,20 +15,23 @@ export async function BookGetHandler(
     res: Response,
     next: NextFunction
 ) {
-    console.log(req.user);
-
     if (!req.user) return res.redirect("/auth/login");
-    else {
-        res.render("book", {
-            seatsio: {
-                publicKey: Configuration.SeatsIO.PublicKey,
-                eventKey: Configuration.SeatsIO.EventKey
-            },
-            path: req.path,
-            isLoggedIn: true,
-            title: Configuration.Web.Site.Title,
-            user: { name: req.user.Name, surname: req.user.Surname },
-            isAdmin: req.user.AccessLevel === "admin"
-        });
+    else if (!req.user.EmailIsVerified) {
+        return res.redirect("/auth/verify");
+        // return next(new Error("Vänligen verifiera din email innan du bokar."));
     }
+    res.render("book", {
+        seatsio: {
+            publicKey: Configuration.SeatsIO.PublicKey,
+            eventKey: Configuration.SeatsIO.EventKey
+        },
+        path: req.path,
+        isLoggedIn: true,
+        title: Configuration.Web.Site.Title,
+        user: {
+            name: req.user.Name,
+            surname: req.user.Surname
+        },
+        isAdmin: req.user.AccessLevel === "admin"
+    });
 }
