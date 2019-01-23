@@ -2,6 +2,13 @@ import { Request, Response, NextFunction } from "express";
 import passport = require("passport");
 import { User } from "@entities/User";
 import { Logger } from "@utilities/Logger";
+import { randomBytes } from "crypto";
+import Mailgun from "mailgun-js";
+import { Configuration } from "@config";
+const mailgunClient = Mailgun({
+    apiKey: Configuration.Mail.ApiKey,
+    domain: Configuration.Mail.Domain
+});
 
 /**
  * @api {post} /auth/login
@@ -70,6 +77,7 @@ export async function SignupPostHandler(
     user.Bookings = [];
     user.AccessLevel = "pleb";
     user.EmailIsVerified = false;
+    user.EmailVerificationToken = randomBytes(48).toString("hex");
 
     try {
         await user.save();
@@ -77,5 +85,11 @@ export async function SignupPostHandler(
         Logger.error(JSON.stringify(error));
         return res.status(500).send("internal server error, please try again");
     }
+
+    user.SendEmail(
+        `Verifiera din email adress: ${req.protocol}://${
+            req.hostname
+        }/api/v1/email/verify?token=${user.EmailVerificationToken}`
+    );
     return res.redirect("/book");
 }

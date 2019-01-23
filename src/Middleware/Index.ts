@@ -38,7 +38,7 @@ export function BindMiddleware() {
     );
     app.use(json()); // for parsing application/json
     app.use(urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-    app.use(express.static(join(__dirname, "../../public")));
+    app.use("/public", express.static(join(__dirname, "../../public")));
     app.use(AuthMiddleware);
     app.use(passport.initialize());
     app.use(passport.session());

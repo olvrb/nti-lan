@@ -14,6 +14,7 @@ import { E404Handler } from "./error/404";
 import { IndexHandler } from "./Index.controller";
 import { UserBookingsGetHandler } from "./user/bookings";
 import { Configuration } from "@config";
+import { EmailVerifyGetHandler } from "./api/v1/email/verify";
 
 export function BindControllers() {
     Logger.info("Binding controllers.");
@@ -37,8 +38,9 @@ export function BindControllers() {
 
     app.post("/api/v1/bookings/remove", BookingRemovePostHandler);
     app.post("/api/v1/bookings/paid", BookingPaidPostHandler);
+    app.get("/api/v1/email/verify", EmailVerifyGetHandler);
 
-    app.use(E404Handler);
+    // app.use(E404Handler);
     app.use((err, req, res, next) => {
         if (err) {
             console.log(err);

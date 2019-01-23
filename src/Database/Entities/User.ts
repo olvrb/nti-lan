@@ -8,6 +8,12 @@ import {
     PrimaryGeneratedColumn,
     OneToOne
 } from "typeorm";
+import Mailgun from "mailgun-js";
+import { Configuration } from "@config";
+const mailgunClient = Mailgun({
+    apiKey: Configuration.Mail.ApiKey,
+    domain: Configuration.Mail.Domain
+});
 
 import { Booking } from "./Booking";
 
@@ -72,6 +78,9 @@ export class User extends BaseEntity {
     public EmailIsVerified: boolean;
 
     @Column()
+    public EmailVerificationToken: string;
+
+    @Column()
     public Password: string;
 
     // Personnummer
@@ -109,4 +118,20 @@ export class User extends BaseEntity {
 
     @Column()
     public AccessLevel: "admin" | "pleb";
+
+    public async SendEmail(message: string) {
+        mailgunClient.messages().send(
+            {
+                from: Configuration.Mail.From,
+                to: this.Email,
+                subject: "NTI LAN",
+                text: message
+            },
+            (error, body) => {
+                if (error) Logger.error(error);
+                console.log(body);
+            }
+        );
+        return true;
+    }
 }
