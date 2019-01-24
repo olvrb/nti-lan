@@ -90,5 +90,10 @@ export async function SignupPostHandler(
         `Verifiera din email adress: ${req.protocol}://${
             req.hostname
         }/api/v1/email/verify?token=${user.EmailVerificationToken}`
-    ).then((x) => res.redirect("/book"));
+    )
+        .then((x) => res.redirect("/book"))
+        .catch((err) => {
+            Logger.error(err);
+            res.redirect("/book");
+        });
 }
