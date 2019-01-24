@@ -1,4 +1,5 @@
 # nti-lan
+[![Build Status](https://travis-ci.com/olvrb/nti-lan.svg?branch=master)](https://travis-ci.com/olvrb/nti-lan)
 
 ## Usage
 
