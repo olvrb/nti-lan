@@ -12,10 +12,11 @@ export class Configuration {
             ]
         }
     };
-    public static SeatsIO = {
-        PrivateKey: "",
-        PublicKey: "",
-        EventKey: ""
+    public static SeatsIO = { PrivateKey: "", PublicKey: "", EventKey: "" };
+    public static Mail = {
+        From: "",
+        Domain: "",
+        ApiKey: ""
     };
     public static Database: ConnectionOptions = {
         type: "postgres",
