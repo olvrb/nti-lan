@@ -8,6 +8,8 @@ import { join } from "path";
 import { getConnection, Repository } from "typeorm";
 import { SessionEntity, TypeormStore } from "typeorm-store";
 import uuid from "uuid/v4";
+import ESwaggerUI from "swagger-ui-express";
+import swaggerDoc = require("../swagger.json");
 
 import { app } from "../Index";
 import { Logger } from "../Utilities/Logger";
@@ -42,4 +44,10 @@ export function BindMiddleware() {
     app.use(AuthMiddleware);
     app.use(passport.initialize());
     app.use(passport.session());
+
+    app.use(
+        "/swagger",
+        ESwaggerUI.serve,
+        ESwaggerUI.setup(swaggerDoc, { explorer: true })
+    );
 }

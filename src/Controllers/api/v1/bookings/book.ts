@@ -20,12 +20,15 @@ export async function BookPostHandler(
     next: NextFunction
 ) {
     if (!req.user) return res.redirect("/");
+    if (!req.user.EmailIsVerified) {
+        return res.redirect("/auth/verify");
+    }
 
     if ((await req.user.Bookings).length >= 2) {
         return next(new Error("Du kan inte boka fler än två platser."));
     }
     const seat = req.body.seat;
-    const referrer = req.body.referrer;
+    // const referrer = req.body.referrer;
     const booking = new Booking();
     booking.Paid = false;
     booking.User = req.user;
@@ -44,9 +47,9 @@ export async function BookPostHandler(
             ]);
         } catch (error) {
             Logger.error(JSON.stringify(error));
-            return res
-                .status(500)
-                .send("failed to reserve seat, probably already reserved.");
+            return next(
+                new Error("Failed to reserve seat, probably already reserved.")
+            );
         }
         booking.SeatId = seat;
         booking.Type = "seat";
