@@ -8,3 +8,30 @@ html,
 * {
     font-family: Soleto;
 }
+
+/* Bootstrap overrides. */
+
+html .btn-primary {
+    background-color: #DD0890;
+    border: 1px #001427;
+}
+
+html .btn-primary:hover {
+    background-color: #8c025a;
+}
+
+.container .card .list-group-item {
+    border-color: #3C153B;
+}
+
+img:last-child {
+    display: none;
+}
+
+a:hover img:last-child {
+    display: block;
+}
+
+a:hover img:first-child {
+    display: none;
+}

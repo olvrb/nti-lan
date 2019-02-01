@@ -128,7 +128,9 @@ export class User extends BaseEntity {
                         from: Configuration.Mail.From,
                         to: this.Email,
                         subject: "NTI LAN",
-                        text: message
+                        html: `${message}
+                        <br/>
+                        NTI LAN Stockholm`
                     },
                     (error, body) => {
                         if (error) return reject(error);
@@ -140,7 +142,7 @@ export class User extends BaseEntity {
         );
     }
 
-    public async ResendVerificationEmail(req: Request) {
+    public async SendVerificationEmail(req: Request) {
         if (this.EmailIsVerified) return new Error("Email already verified");
         return new Promise<{ id: string; message: string }>(
             (resolve, reject) => {

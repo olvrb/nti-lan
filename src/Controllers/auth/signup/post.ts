@@ -86,11 +86,7 @@ export async function SignupPostHandler(
         return res.status(500).send("internal server error, please try again");
     }
 
-    user.SendEmail(
-        `Verifiera din email adress: ${req.protocol}://${
-            req.hostname
-        }/api/v1/email/verify?token=${user.EmailVerificationToken}`
-    )
+    user.SendVerificationEmail(req)
         .then((x) => res.redirect("/book"))
         .catch((err) => {
             Logger.error(err);
