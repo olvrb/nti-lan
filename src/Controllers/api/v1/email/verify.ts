@@ -37,6 +37,11 @@ export async function EmailVerifyGetHandler(
     user.EmailIsVerified = true;
     user.EmailVerificationToken = "";
     await user.save();
-    // TODO: render a nice success page.
-    return res.send("email verifierad.");
+    return res.render("success", {
+        info: "Email verifierad.",
+        path: req.path,
+        title: Configuration.Web.Site.Title,
+        isAdmin: req.user.AccessLevel === "admin",
+        isLoggedIn: req.user ? true : false
+    });
 }
