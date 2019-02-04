@@ -127,7 +127,7 @@ export class User extends BaseEntity {
                     {
                         from: Configuration.Mail.From,
                         to: this.Email,
-                        subject: "NTI LAN",
+                        subject: Configuration.Web.Site.Title,
                         html: `${message}
                         <br/>
                         NTI LAN Stockholm`
