@@ -1,4 +1,4 @@
-import { IControllerInfo } from "@docs/Interfaces/ContorllerInfo";
+import { IControllerInfo } from "@docs/Interfaces/IContorllerInfo";
 import {
     readdirSync,
     statSync,
@@ -37,29 +37,24 @@ async function LoadAndCompileDocs(docs: IControllerInfo[]) {
 
     // const template = ejs.compile(readFileSync(templatePath));
     const file = readFileSync(templatePath, "utf8");
-    console.log(docs);
-
+    const uniqueCategories = GetUniqueCategories(docs);
     const template = ejs.render(file, {
         docs,
-        categories: GetUniqueCategories(docs)
+        categories: uniqueCategories
     });
 
     writeFileSync(writePath, template, "utf8");
-    // template({ docs });
 }
 
 function GetUniqueCategories(docs: IControllerInfo[]): string[] {
     const categories: string[] = [];
     for (const doc of docs) {
-        if (!categories.includes(doc.Category)) {
-            categories.push(
-                `${doc.Category.charAt(0).toUpperCase()}${doc.Category.slice(
-                    1
-                )}`
-            );
-        }
+        categories.push(
+            `${doc.Category.charAt(0).toUpperCase()}${doc.Category.slice(1)}`
+        );
     }
-    return categories;
+
+    return [...new Set(categories)];
 }
 
 const walkSync = (path: string, filelist?) => {

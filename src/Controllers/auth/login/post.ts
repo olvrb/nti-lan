@@ -1,7 +1,7 @@
 import { Logger } from "@utilities/Logger";
 import { NextFunction, Request, Response } from "express";
 import passport from "passport";
-import { IControllerInfo } from "@docs/Interfaces/ContorllerInfo";
+import { IControllerInfo } from "@docs/Interfaces/IContorllerInfo";
 
 /**
  * @api {post} /auth/login

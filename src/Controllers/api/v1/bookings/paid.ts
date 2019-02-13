@@ -1,5 +1,6 @@
 import { Booking } from "@entities/Booking";
 import { NextFunction, Request, Response } from "express";
+import { IControllerInfo } from "@docs/Interfaces/IContorllerInfo";
 
 /**
  * @api {post} /auth/login
@@ -35,3 +36,30 @@ export async function BookingPaidPostHandler(
     );
     return res.redirect("/admin/bookings");
 }
+
+export const Info: IControllerInfo = {
+    Name: "MarkAsPaid",
+    Description: "Mark a booking as paid.",
+    Category: "bookings",
+    Request: {
+        Endpoint: "/api/v1/bookings/paid",
+        Method: "POST",
+        Parameters: [
+            {
+                Name: "booking",
+                Type: "string",
+                Example: "test@example.org",
+                Description: "The booking ID to be marked as paid."
+            },
+            {
+                Name: "reason",
+                Type: "string",
+                Example: "123",
+                Description: "Reason (transaction ID or similar)."
+            }
+        ]
+    },
+    Response: {
+        Redirect: "/book"
+    }
+};

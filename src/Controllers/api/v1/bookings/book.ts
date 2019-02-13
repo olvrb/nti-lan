@@ -3,7 +3,7 @@ import { Booking } from "@entities/Booking";
 import { Logger } from "@utilities/Logger";
 import { NextFunction, Request, Response } from "express";
 import SeatsioClient from "seatsio";
-import { IControllerInfo } from "@docs/Interfaces/ContorllerInfo";
+import { IControllerInfo } from "@docs/Interfaces/IContorllerInfo";
 
 const client = new SeatsioClient(Configuration.SeatsIO.PrivateKey);
 /**
@@ -67,7 +67,7 @@ export async function BookPostHandler(
 export const Info: IControllerInfo = {
     Name: "Book",
     Description: "Book a seat",
-    Category: "book",
+    Category: "bookings",
     Request: {
         Endpoint: "/api/v1/bookings/book",
         Method: "POST",

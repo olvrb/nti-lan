@@ -36,14 +36,14 @@
         "typeorm-static": "^1.1.0",
         "typeorm-store": "^1.2.0",
         "uuid": "^3.3.2",
-        "winston": "^3.1.0"
+        "winston": "^3.1.0",
+        "typescript": "^3.0.3"
     },
     "devDependencies": {
         "prettier": "^1.14.3",
         "tslint": "^5.11.0",
         "tslint-config-prettier": "^1.15.0",
-        "tslint-config-standard": "^8.0.1",
-        "typescript": "^3.0.3"
+        "tslint-config-standard": "^8.0.1"
     },
     "_moduleAliases": {
         "@config": "dist/Config.js",
