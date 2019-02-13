@@ -1,5 +1,6 @@
 import { Configuration } from "@config";
 import { NextFunction, Request, Response } from "express";
+import { User } from "@entities/User";
 
 /**
  * @api {get} /auth/login
@@ -19,7 +20,7 @@ export async function VerifyPostHandler(
     if (req.user.EmailIsVerified) {
         return res.redirect("/");
     }
-    req.user.ResendVerificationEmail(req).then((x) =>
+    req.user.SendVerificationEmail(req).then((x) =>
         res.render("success", {
             info: "Mailet skickades.",
             path: req.path,

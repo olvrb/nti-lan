@@ -48,6 +48,7 @@
     "_moduleAliases": {
         "@config": "dist/Config.js",
         "@entities": "dist/Database/Entities",
-        "@utilities": "dist/Utilities"
+        "@utilities": "dist/Utilities",
+        "@docs": "dist/Documentation"
     }
 }

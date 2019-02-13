@@ -1,22 +1,23 @@
+import { Configuration } from "@config";
+
 import { app } from "../Index";
 import { Logger } from "../Utilities/Logger";
 import { AdminBookingsGetHandler } from "./admin/bookings";
 import { BookPostHandler } from "./api/v1/bookings/book";
 import { BookingPaidPostHandler } from "./api/v1/bookings/paid";
 import { BookingRemovePostHandler } from "./api/v1/bookings/remove";
+import { EmailVerifyGetHandler } from "./api/v1/email/verify";
 import { LoginGetHandler } from "./auth/login/get";
 import { LoginPostHandler } from "./auth/login/post";
 import { LogoutGetHandler } from "./auth/logout/get";
 import { SignupGetHandler } from "./auth/signup/get";
 import { SignupPostHandler } from "./auth/signup/post";
-import { BookGetHandler } from "./book/get";
-import { E404Handler } from "./error/404";
-import { IndexHandler } from "./Index.controller";
-import { UserBookingsGetHandler } from "./user/bookings";
-import { Configuration } from "@config";
-import { EmailVerifyGetHandler } from "./api/v1/email/verify";
 import { VerifyGetHandler } from "./auth/verify/get";
 import { VerifyPostHandler } from "./auth/verify/post";
+import { BookGetHandler } from "./book/get";
+import { IndexHandler } from "./Index.controller";
+import { UserBookingsGetHandler } from "./user/bookings";
+import { GenerateDocs } from "@docs/Index";
 
 export function BindControllers() {
     Logger.info("Binding controllers.");
@@ -43,6 +44,8 @@ export function BindControllers() {
     app.get("/api/v1/email/verify", EmailVerifyGetHandler);
     app.get("/auth/verify", VerifyGetHandler);
     app.post("/auth/verify", VerifyPostHandler);
+
+    GenerateDocs();
 
     // app.use(E404Handler);
     app.use((err, req, res, next) => {

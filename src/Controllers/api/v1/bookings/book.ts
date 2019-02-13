@@ -3,6 +3,7 @@ import { Booking } from "@entities/Booking";
 import { Logger } from "@utilities/Logger";
 import { NextFunction, Request, Response } from "express";
 import SeatsioClient from "seatsio";
+import { IControllerInfo } from "@docs/Interfaces/ContorllerInfo";
 
 const client = new SeatsioClient(Configuration.SeatsIO.PrivateKey);
 /**
@@ -62,3 +63,19 @@ export async function BookPostHandler(
     await booking.save();
     return res.redirect("/user/bookings");
 }
+
+export const Info: IControllerInfo = {
+    Name: "Book",
+    Description: "Book a seat",
+    Category: "book",
+    Request: {
+        Endpoint: "/api/v1/bookings/book",
+        Method: "POST",
+        Parameters: [
+            { Name: "email", Type: "string", Example: "test@example.org" }
+        ]
+    },
+    Response: {
+        Redirect: "/user/bookings"
+    }
+};

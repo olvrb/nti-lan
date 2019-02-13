@@ -1,6 +1,7 @@
 import { Logger } from "@utilities/Logger";
 import { NextFunction, Request, Response } from "express";
 import passport from "passport";
+import { IControllerInfo } from "@docs/Interfaces/ContorllerInfo";
 
 /**
  * @api {post} /auth/login
@@ -20,8 +21,6 @@ export async function LoginPostHandler(
     res: Response,
     next: NextFunction
 ) {
-    Logger.info("inside post");
-
     passport.authenticate("local", (err, user, info) => {
         if (!user) {
             return res.redirect("/auth/login?loginError");
@@ -40,3 +39,20 @@ export async function LoginPostHandler(
         });
     })(req, res, next);
 }
+
+export const Info: IControllerInfo = {
+    Name: "Login",
+    Description: "Login to your account.",
+    Category: "auth",
+    Request: {
+        Endpoint: "/auth/login",
+        Method: "POST",
+        Parameters: [
+            { Name: "email", Type: "string", Example: "test@example.org" },
+            { Name: "password", Type: "string", Example: "123" }
+        ]
+    },
+    Response: {
+        Redirect: "/book"
+    }
+};

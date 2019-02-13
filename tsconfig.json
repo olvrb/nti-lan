@@ -37,7 +37,8 @@
         "paths": {
             "@config": ["Config.ts"],
             "@entities/*": ["Database/Entities/*"],
-            "@utilities/*": ["Utilities/*"]
+            "@utilities/*": ["Utilities/*"],
+            "@docs/*": ["Documentation/*"]
         },
         "baseUrl": "src"
     },
