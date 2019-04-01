@@ -19,7 +19,9 @@ export async function VerifyPostHandler(
     if (req.user.EmailIsVerified) {
         return res.redirect("/");
     }
-    req.user.ResendVerificationEmail(req).then((x) =>
+    console.log(req.user);
+
+    req.user.SendVerificationEmail(req).then((x) =>
         res.render("success", {
             info: "Mailet skickades.",
             path: req.path,
