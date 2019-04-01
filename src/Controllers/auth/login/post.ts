@@ -20,9 +20,8 @@ export async function LoginPostHandler(
     res: Response,
     next: NextFunction
 ) {
-    Logger.info("inside post");
-
     passport.authenticate("local", (err, user, info) => {
+        // Authentication failed, redirect and let the client know.
         if (!user) {
             return res.redirect("/auth/login?loginError");
         }

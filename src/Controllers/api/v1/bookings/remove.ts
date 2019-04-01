@@ -22,6 +22,8 @@ export async function BookingRemovePostHandler(
     next: NextFunction
 ) {
     if (!req.user) return res.redirect("/");
+
+    // If the user is an admin, it should be able to remove *any* booking.
     if (req.user.AccessLevel === "admin") {
         const booking = await Booking.findOne({
             where: { Id: req.body.booking }
@@ -39,7 +41,9 @@ export async function BookingRemovePostHandler(
         }
         await booking.remove();
         return res.redirect("/admin/bookings");
-    } else {
+    }
+    // If the user isn't admin, it should only be able to remove *its own* bookings.
+    else {
         const booking = await Booking.findOne({
             where: { User: req.user, Id: req.body.booking }
         });

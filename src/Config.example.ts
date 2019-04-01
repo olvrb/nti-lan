@@ -22,7 +22,7 @@ export class Configuration {
         type: "postgres",
         host: "localhost",
         port: 5432,
-        database: "nti-lan",
+        database: "ntilan",
         synchronize: true,
         username: "postgres",
         password: "123"

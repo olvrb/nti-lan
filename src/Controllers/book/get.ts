@@ -15,10 +15,10 @@ export async function BookGetHandler(
     res: Response,
     next: NextFunction
 ) {
+    // Require the user to be both logged in, and have a verified email.
     if (!req.user) return res.redirect("/auth/login");
     else if (!req.user.EmailIsVerified) {
         return res.redirect("/auth/verify");
-        // return next(new Error("Vänligen verifiera din email innan du bokar."));
     }
     res.render("book", {
         seatsio: {

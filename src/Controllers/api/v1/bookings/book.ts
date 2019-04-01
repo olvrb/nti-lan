@@ -37,6 +37,7 @@ export async function BookPostHandler(
     if (seat !== "") {
         // Book seat
         try {
+            // If the user selected a seat, reserve it with the seatsio api.
             await client.events.book(Configuration.SeatsIO.EventKey, [
                 {
                     objectId: seat,
@@ -53,11 +54,11 @@ export async function BookPostHandler(
         }
         booking.SeatId = seat;
         booking.Type = "seat";
-        booking.Price = 60;
+        booking.Price = 90;
     } else {
         booking.SeatId = "";
         booking.Type = "entry";
-        booking.Price = 30;
+        booking.Price = 60;
     }
     await booking.save();
     return res.redirect("/user/bookings");

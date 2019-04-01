@@ -22,6 +22,7 @@ export async function BookingPaidPostHandler(
 
     const booking = await Booking.findOne({ where: { Id: req.body.booking } });
 
+    // Didn't find booking, show error.
     if (booking === undefined) return next(new Error("Ogiltig bokning."));
 
     booking.SwishId = req.body.reason;
