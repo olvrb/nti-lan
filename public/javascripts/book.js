@@ -11,7 +11,7 @@ $("#submit").click((e) => {
     modalInfo.innerHTML = `Sittplats: ${
         seatInfo.value ? seatInfo.value : "ingen vald"
     }`;
-    modalInfo.innerHTML += `<br/>Pris: ${seatInfo.value ? 60 : 30}kr`;
+    modalInfo.innerHTML += `<br/>Pris: ${seatInfo.value ? 90 : 60}kr`;
 });
 
 $("#form").submit((e) => {

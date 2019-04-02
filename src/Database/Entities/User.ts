@@ -120,6 +120,9 @@ export class User extends BaseEntity {
     @Column()
     public AccessLevel: "admin" | "pleb";
 
+    @Column({ default: () => `now()` })
+    public CreatedAt: string;
+
     public async SendEmail(message: string) {
         return new Promise<{ id: string; message: string }>(
             (resolve, reject) => {

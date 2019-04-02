@@ -28,4 +28,7 @@ export class Booking extends BaseEntity {
 
     @Column()
     public SwishId: string;
+
+    @Column({ default: () => `now()` })
+    public CreatedAt: string;
 }
