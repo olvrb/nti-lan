@@ -9,7 +9,7 @@ $("#submit").click((e) => {
     const modalInfo = document.querySelector("#modalInfo");
     const seatInfo = document.querySelector("#seat");
     modalInfo.innerHTML = `Sittplats: ${
-        seatInfo.value ? seatInfo.value : "ingen vald"
+        seatInfo.value ? seatInfo.value : "ingen vald (endast entré)"
     }`;
     modalInfo.innerHTML += `<br/>Pris: ${seatInfo.value ? 90 : 60}kr`;
 });
