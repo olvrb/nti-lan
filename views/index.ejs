@@ -16,48 +16,42 @@
     <%- include("topbar") %>
 
     <div style="margin-top: 1rem;" class="container">
-       
+
         <div class="row align-items-center card-deck">
             <div class="card">
                 <div class="card-header">
-                    <h4>Information</h1>
+                    <h4>Information</h4>
                 </div>
                 <div class="card-body">
                     <p class="card-text">
-                        <h3>Priser</h3>
-                        <p>Endast entré: 60 kronor</p>
-                        <p>Entré och sittplats: 90 kronor</p>
+                        Bokningen är nu öppen för årets första NTI-LAN som äger rum den
+                        <span class="text-highlight">12-13 April</span> på
+                        <a href="https://goo.gl/maps/H5yDqzPpLry" class="text-highlight">Upplandsgatan 39</a>. Vi öppnar
+                        <span class="text-highlight">kl 20:00 på fredagskvällen och stänger
+                            kl 8:00 lördag</span>
+                        morgon. Sittplatser
+                        inkluderar stol och boplats samt bokas i förväg. Vid bokning av sittplats
+                        <span class="text-highlight">medtages egen dator,
+                            skärm och TP-kabel (ca 2m).</span>
 
-                        <h3>När?</h3>
-                        <p>Kl 20 till kl 8 den 12 april 2019.</p>
+                        Väl på LANet finns den kiosk för försäljning av snacks, godis, dryck samt även en begränsad
+                        mängd faktisk föda i form av nudlar, kaffe och frukt. Utöver detta finns det under LANet ett
+                        antal aktiviteter att delta i även utan bokad sittplats.
 
-                        <h3>Var?</h3>
-                        <p>Annexet, <a target="_blank" href="https://goo.gl/maps/H5yDqzPpLry">Upplandsgatan 49</a></p>
-
-                        <h3>Vad ska jag ta med?</h3>
-                        <p>Dator, skärm, ethernet (förlåt calle) sladd (~2+ meter)</p>
-
-                        <h3>Kiosk och mat</h3>
-                        <p>Väl på LANet finns den kiosk för försäljning av snacks, godis, dryck samt även en begränsad mängd faktisk föda i form av
-                        nudlar, kaffe och frukt.</p>
-
-
-                        <h3>Aktiviteter</h3>
-                        <h6 class="text-info">Under LANet finns ett antal aktiviteter att delta i även utan bokad sittplats.</h6>
-
-                        <h4>Konsollrummet</h4>
-                        <p>I konsolrummet finns ett stort utbud av konsolspel av olika genrer, däribland fighting spel, retrospel samt klassiska
-                            favoriter. Förberedda sessioner i D&D kommer att hållas i rollspelsklubbens rum.</p>
-
-                        <h4>Animerummet</h4>
-                        <p>Sova och kolla på anime.</p>
-
-                        <h4>Turneringar</h4>
-                        <p>Turneringar kommer att hållas i särskilt <!-- lazy mans selector reference --><a href="javascript:window.scrollTo(0,document.body.scrollHeight);">utvalda spel</a>.</p>
-
-                        <h4>Sovrum</h4>
-                        <p>Nytt för i år är ett officiellt sovrum för de individer som, istället för att med energidryck halvera sin livstid,
-                        regenererar energi genom mer hälsosamma metoder.</p>
+                        I <span class="text-highlight">konsolrummet</span> finns ett stort utbud av
+                        konsolspel av olika genrer, däribland fighting spel,
+                        retrospel samt klassiska favoriter. Förberedda sessioner i D&D kommer att hållas i
+                        <span class="text-highlight">rollspelsklubbens</span> rum. Vad som sker i <span
+                            class="text-highlight">animerummet</span> är
+                        hittills okänt för omvärlden.
+                        <span class="text-highlight">Turneringar</span>
+                        kommer att hållas i särskilt <a
+                            href="javascript:window.scrollTo(0,document.body.scrollHeight);">utvalda spel</a>. Anmälan
+                        sker på plats vid
+                        bokningsbordet dedikerat
+                        till turneringar. Nytt för i år är ett officiellt <span class="text-highlight">sovrum</span> för
+                        de individer som, istället för att
+                        med energidryck halvera sin livstid, regenererar energi genom mer hälsosamma metoder.
                     </p>
                 </div>
             </div>
@@ -68,6 +62,12 @@
                     <h4>Turneringar</h4>
                 </div>
 
+                <div class="card-body">
+                    <p class="card-text">
+                        Anmälning till tuneringar sker på plats.
+                    </p>
+                </div>
+
                 <ul class="list-group list-group-flush">
                     <% for (const game of games) { %>
                     <li class="list-group-item">
@@ -75,11 +75,7 @@
                     </li>
                     <% } %>
                 </ul>
-                <div class="card-body">
-                    <p class="card-text">
-                        Anmälning till tuneringar sker på plats.
-                    </p>
-                </div>
+
             </div>
         </div>
 

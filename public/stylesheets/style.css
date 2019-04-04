@@ -11,6 +11,11 @@ html,
 
 /* Bootstrap overrides. */
 
+.text-highlight {
+    color: #DD0890;
+    font-weight: bold;
+}
+
 html .btn-primary {
     background-color: #DD0890;
     border: 1px #001427;
