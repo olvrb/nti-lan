@@ -24,6 +24,10 @@
             </tr>
         </thead>
         <tbody>
+            <!--  
+                Make a row for every single booking. We don't expect *too* many bookings
+                so there's no need to limit it. 
+            -->
             <% for (const book of bookings) { %>
             <tr>
                 <td><%= `${book.User.Name} ${book.User.Surname} ${book.User.Class}` %></td>
