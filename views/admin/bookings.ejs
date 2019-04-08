@@ -12,6 +12,7 @@
 <body>
     <%- include("../topbar") %>
     <h2 class="col-auto">Admin stuff</h2>
+    <p><%= bookings.length %> bookings, <%= bookings.filter(x => x.Paid).length %> paid</p>
     <table class="table table-borderless table-hover">
         <thead>
             <tr>
@@ -25,11 +26,16 @@
         <tbody>
             <% for (const book of bookings) { %>
             <tr>
-                <td><%= `${book.User.Name} ${book.User.Surname}` %></td>
+                <td><%= `${book.User.Name} ${book.User.Surname} ${book.User.Class}` %></td>
                 <td><%= book.User.Email %></td>
                 <td><%= book.Type %></td>
                 <td><%= book.SeatId ? book.SeatId : "-" %></td>
-                <td><%= book.Paid ? "ja" : "nej" %></td>
+                <td>
+                    <%- book.Paid 
+                        ? "<span class='badge badge-success'>Betald</span>"
+                        : "<span class='badge badge-danger'>Obetald</span>" 
+                    %>
+                </td>
                 <% if (!book.Paid) { %>
                 <td>
                     <form id="markPaid" action="/api/v1/bookings/paid" method="post">
