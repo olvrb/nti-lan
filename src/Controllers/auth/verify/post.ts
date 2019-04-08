@@ -19,15 +19,17 @@ export async function VerifyPostHandler(
     if (req.user.EmailIsVerified) {
         return res.redirect("/");
     }
-    console.log(req.user);
 
-    req.user.SendVerificationEmail(req).then((x) =>
-        res.render("success", {
-            info: "Mailet skickades.",
-            path: req.path,
-            title: Configuration.Web.Site.Title,
-            isAdmin: req.user.AccessLevel === "admin",
-            isLoggedIn: req.user ? true : false
-        })
-    );
+    req.user
+        .SendVerificationEmail(req)
+        .then((x) =>
+            res.render("success", {
+                info: "Mailet skickades.",
+                path: req.path,
+                title: Configuration.Web.Site.Title,
+                isAdmin: req.user.AccessLevel === "admin",
+                isLoggedIn: req.user ? true : false
+            })
+        )
+        .catch((error) => res.render("error", { error }));
 }

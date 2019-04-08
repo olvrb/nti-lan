@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
 import { Configuration } from "@config";
+import { Request, Response } from "express";
 export async function IndexHandler(req: Request, res: Response) {
     res.render("index", {
         path: req.path,

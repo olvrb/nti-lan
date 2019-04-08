@@ -1,28 +1,29 @@
+import { Configuration } from "@config";
 import { Logger } from "@utilities/Logger";
 import { compareSync, hashSync } from "bcrypt";
+import Mailgun from "mailgun-js";
 import {
     BaseEntity,
     Column,
     Entity,
     OneToMany,
-    PrimaryGeneratedColumn,
-    OneToOne
+    PrimaryGeneratedColumn
 } from "typeorm";
-import Mailgun from "mailgun-js";
-import { Configuration } from "@config";
 const mailgunClient = Mailgun({
     apiKey: Configuration.Mail.ApiKey,
     domain: Configuration.Mail.Domain
 });
 
-import { Booking } from "./Booking";
 import { Request } from "express";
+import { Booking } from "./Booking";
 
 @Entity()
 export class User extends BaseEntity {
     public static HashPassword(password: string) {
         return hashSync(password, 12);
     }
+
+    // Used to auth a user through passport.
     public static async Authenticate(email: string, password: string, done) {
         const user = await User.findOne({
             where: { Email: email }
@@ -41,6 +42,7 @@ export class User extends BaseEntity {
         }
     }
 
+    // Some email regex. Fuck regex.
     public static ValidateEmail(email: string) {
         return email.match(
             /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/
@@ -53,6 +55,7 @@ export class User extends BaseEntity {
         return password.length >= 8;
     }
 
+    // YYMMDD-XXXX
     public static ValidateNationalId(nationalId: string) {
         return nationalId.match(
             /^(19|20)?[0-9]{2}[- ]?((0[0-9])|(10|11|12))[- ]?(([0-2][0-9])|(3[0-1])|(([7-8][0-9])|(6[1-9])|(9[0-1])))[- ]?[0-9]{4}$/g
@@ -61,6 +64,7 @@ export class User extends BaseEntity {
             : false;
     }
 
+    // Avoid regex at all cost.
     public static ValidatePhone(phone: string) {
         // Faster than regex.
         return phone.startsWith("07") && phone.length === 10;
@@ -69,6 +73,7 @@ export class User extends BaseEntity {
     public static ValidatePostcode(postcode: string) {
         return postcode.length === 5;
     }
+
     @PrimaryGeneratedColumn("uuid")
     public Id: string;
 
@@ -114,15 +119,19 @@ export class User extends BaseEntity {
     @Column()
     public City: string;
 
+    // User can own multiple bookings.
     @OneToMany((type) => Booking, (booking) => booking.User, { lazy: true })
     public Bookings: Booking[];
 
+    // Gotta give some fun names huh.
+    // (Admin has more permissions, such as removing * any * booking etc.pleb is the default, and means a regular user with less permissions.)
     @Column()
     public AccessLevel: "admin" | "pleb";
 
     @Column({ default: () => `now()` })
     public CreatedAt: string;
 
+    // Have a default email template for consistency.
     public async SendEmail(message: string) {
         return new Promise<{ id: string; message: string }>(
             (resolve, reject) => {

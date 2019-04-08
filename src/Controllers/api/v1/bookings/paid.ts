@@ -1,22 +1,12 @@
 import { Booking } from "@entities/Booking";
 import { NextFunction, Request, Response } from "express";
 
-/**
- * @api {post} /auth/login
- * @apiName Login.
- * @apiPermission anyone
- * @apiGroup anyone
- *
- * @apiParam booking
- *
- * @apiSuccess (200) {Object} { success: true }
- * @apiFail (500) {Object} { success: false }
- */
 export async function BookingPaidPostHandler(
     req: Request,
     res: Response,
     next: NextFunction
 ) {
+    // Must be logged in and have the correct permissions to mark a booking as paid.
     if (!req.user) return res.redirect("/");
     if (req.user.AccessLevel !== "admin") return res.redirect("/");
 

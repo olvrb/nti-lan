@@ -1,6 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import { User } from "@entities/User";
 import { Configuration } from "@config";
+import { NextFunction, Request, Response } from "express";
 
 /**
  * @api {post} /auth/login

@@ -8,8 +8,6 @@ import { join } from "path";
 import { getConnection, Repository } from "typeorm";
 import { SessionEntity, TypeormStore } from "typeorm-store";
 import uuid from "uuid/v4";
-import ESwaggerUI from "swagger-ui-express";
-import swaggerDoc = require("../swagger.json");
 
 import { app } from "../Index";
 import { Logger } from "../Utilities/Logger";
@@ -18,6 +16,7 @@ import { LoggerMiddleware } from "./Logger/Index";
 
 export function BindMiddleware() {
     Logger.info("Binding middleware.");
+    // Allows us to get a real IP from our reverse proxy, in this case we use nginx.
     app.enable("trust proxy");
     app.use(LoggerMiddleware);
     app.use(
@@ -41,13 +40,9 @@ export function BindMiddleware() {
     app.use(json()); // for parsing application/json
     app.use(urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
     app.use("/public", express.static(join(__dirname, "../../public")));
+
+    // This order is important... Learnt that the hard way.
     app.use(AuthMiddleware);
     app.use(passport.initialize());
     app.use(passport.session());
-
-    app.use(
-        "/swagger",
-        ESwaggerUI.serve,
-        ESwaggerUI.setup(swaggerDoc, { explorer: true })
-    );
 }

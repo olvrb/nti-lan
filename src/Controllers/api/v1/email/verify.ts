@@ -1,11 +1,7 @@
 import { Configuration } from "@config";
-import { Booking } from "@entities/Booking";
-import { NextFunction, Request, Response } from "express";
-import SeatsioClient from "seatsio";
-import { Logger } from "@utilities/Logger";
 import { User } from "@entities/User";
+import { NextFunction, Request, Response } from "express";
 
-const client = new SeatsioClient(Configuration.SeatsIO.PrivateKey);
 /**
  * @api {post} /auth/login
  * @apiName Login.

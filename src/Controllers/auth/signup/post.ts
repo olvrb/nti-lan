@@ -1,14 +1,7 @@
-import { Request, Response, NextFunction } from "express";
-import passport = require("passport");
 import { User } from "@entities/User";
 import { Logger } from "@utilities/Logger";
 import { randomBytes } from "crypto";
-import Mailgun from "mailgun-js";
-import { Configuration } from "@config";
-const mailgunClient = Mailgun({
-    apiKey: Configuration.Mail.ApiKey,
-    domain: Configuration.Mail.Domain
-});
+import { NextFunction, Request, Response } from "express";
 
 /**
  * @api {post} /auth/login
@@ -27,6 +20,7 @@ export async function SignupPostHandler(
     res: Response,
     next: NextFunction
 ) {
+    // Deconstruct the object... ES6 is great.
     const {
         email,
         password,
@@ -39,6 +33,8 @@ export async function SignupPostHandler(
         postcode,
         city
     } = req.body;
+
+    // This is really ugly, but I'm too lazy to fix it. I could probably use the success template...
     if (!User.ValidateEmail(email)) {
         return res.status(400).send("ogiltig email");
     }
@@ -59,6 +55,8 @@ export async function SignupPostHandler(
         return res.status(400).send("ogiltig postaddress (ex. 11266)");
     }
     const oldUser = await User.findOne({ where: { Email: email } });
+
+    // User already exists? Let the client know.
     if (oldUser !== undefined) {
         return res.redirect("/auth/signup?invalidForm");
     }
@@ -77,6 +75,7 @@ export async function SignupPostHandler(
     user.Bookings = [];
     user.AccessLevel = "pleb";
     user.EmailIsVerified = false;
+    // Generate a random verification token. randomBytes is cryptographically secure: https://nodejs.org/api/crypto.html#crypto_crypto_randombytes_size_callback
     user.EmailVerificationToken = randomBytes(48).toString("hex");
 
     try {
@@ -86,6 +85,7 @@ export async function SignupPostHandler(
         return res.status(500).send("internal server error, please try again");
     }
 
+    // Let the user verify their email.
     user.SendVerificationEmail(req)
         .then((x) => res.redirect("/book"))
         .catch((err) => {

@@ -2,20 +2,9 @@ import { Configuration } from "@config";
 import { Booking } from "@entities/Booking";
 import { NextFunction, Request, Response } from "express";
 import SeatsioClient from "seatsio";
-import { Logger } from "@utilities/Logger";
 
 const client = new SeatsioClient(Configuration.SeatsIO.PrivateKey);
-/**
- * @api {post} /auth/login
- * @apiName Login.
- * @apiPermission anyone
- * @apiGroup anyone
- *
- * @apiParam booking
- *
- * @apiSuccess (200) {Object} { success: true }
- * @apiFail (500) {Object} { success: false }
- */
+
 export async function BookingRemovePostHandler(
     req: Request,
     res: Response,

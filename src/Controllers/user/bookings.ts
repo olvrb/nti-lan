@@ -1,6 +1,5 @@
 import { Configuration } from "@config";
 import { Booking } from "@entities/Booking";
-import { User } from "@entities/User";
 import { Request, Response } from "express";
 
 /**

@@ -8,6 +8,7 @@ export async function AuthMiddleware(
     res: Response,
     next: NextFunction
 ) {
+    // Configure passport as middleware.
     passport.use(
         new LocalStrategy({ usernameField: "email" }, User.Authenticate)
     );

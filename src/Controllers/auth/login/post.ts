@@ -1,4 +1,3 @@
-import { Logger } from "@utilities/Logger";
 import { NextFunction, Request, Response } from "express";
 import passport from "passport";
 
@@ -20,8 +19,8 @@ export async function LoginPostHandler(
     res: Response,
     next: NextFunction
 ) {
-    passport.authenticate("local", (err, user, info) => {
-        // Authentication failed, redirect and let the client know.
+    passport.authenticate("local", (err, user) => {
+        // Authentication failed, redirect and let the client know with a url parameter.
         if (!user) {
             return res.redirect("/auth/login?loginError");
         }
@@ -29,10 +28,12 @@ export async function LoginPostHandler(
         if (err) {
             return res.status(500).json({ error: "internal server error" });
         }
-        req.login(user, (error) => {
+        req.login(user, () => {
             if (err) {
                 return res.status(500).json({ error: "internal server error" });
             }
+
+            // I encountered a strange bug which wouldn't mark the user as logged in in certain cases... nextTick fixed it.
             process.nextTick(() => {
                 return res.redirect("/book");
             });

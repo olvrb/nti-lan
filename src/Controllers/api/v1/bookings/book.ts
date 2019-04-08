@@ -28,7 +28,6 @@ export async function BookPostHandler(
         return next(new Error("Du kan inte boka fler än två platser."));
     }
     const seat = req.body.seat;
-    // const referrer = req.body.referrer;
     const booking = new Booking();
     booking.Paid = false;
     booking.User = req.user;
@@ -37,7 +36,7 @@ export async function BookPostHandler(
     if (seat !== "") {
         // Book seat
         try {
-            // If the user selected a seat, reserve it with the seatsio api.
+            // If the user selected a seat, reserve it with the seatsio api. Also set the price to 90.
             await client.events.book(Configuration.SeatsIO.EventKey, [
                 {
                     objectId: seat,
@@ -49,13 +48,16 @@ export async function BookPostHandler(
         } catch (error) {
             Logger.error(JSON.stringify(error));
             return next(
-                new Error("Failed to reserve seat, probably already reserved.")
+                new Error(
+                    "Kunde inte reservera din sittplats, den är säkert redan upptagen."
+                )
             );
         }
         booking.SeatId = seat;
         booking.Type = "seat";
         booking.Price = 90;
     } else {
+        // If the user didn't select a seat, change the type and set the price to 60.
         booking.SeatId = "";
         booking.Type = "entry";
         booking.Price = 60;

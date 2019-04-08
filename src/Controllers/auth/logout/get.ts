@@ -1,6 +1,4 @@
-import { Request, Response, NextFunction } from "express";
-import { User } from "@entities/User";
-import { Configuration } from "@config";
+import { NextFunction, Request, Response } from "express";
 
 /**
  * @api {get} /auth/signout
@@ -16,6 +14,7 @@ export async function LogoutGetHandler(
     res: Response,
     next: NextFunction
 ) {
+    // KILL EVERYTHING
     if (req.user && req.session) {
         req.session.destroy((err) => err);
         req.logout();

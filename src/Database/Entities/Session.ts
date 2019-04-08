@@ -1,6 +1,7 @@
 import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
 import { SessionEntity } from "typeorm-store";
 
+// Woosh inheritance
 @Entity()
 export class Session extends BaseEntity implements SessionEntity {
     @PrimaryColumn()
