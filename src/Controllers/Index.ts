@@ -16,6 +16,7 @@ import { VerifyPostHandler } from "./auth/verify/post";
 import { BookGetHandler } from "./book/get";
 import { IndexHandler } from "./Index.controller";
 import { UserBookingsGetHandler } from "./user/bookings";
+import { RawAdminBookingsGetHandler } from "./admin/rawBookings";
 
 export function BindControllers() {
     Logger.info("Binding controllers.");
@@ -35,6 +36,8 @@ export function BindControllers() {
 
     app.get("/admin/bookings", AdminBookingsGetHandler);
     app.get("/user/bookings", UserBookingsGetHandler);
+
+    app.get("/admin/rawbookings", RawAdminBookingsGetHandler);
 
     app.post("/api/v1/bookings/remove", BookingRemovePostHandler);
     app.post("/api/v1/bookings/paid", BookingPaidPostHandler);
