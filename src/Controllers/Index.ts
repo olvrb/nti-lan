@@ -2,7 +2,7 @@ import { Configuration } from "@config";
 import { app } from "../Index";
 import { Logger } from "../Utilities/Logger";
 import { AdminBookingsGetHandler } from "./admin/bookings";
-import { RawAdminBookingsGetHandler } from "./admin/rawBookings";
+// import { RawAdminBookingsGetHandler } from "./admin/rawBookings";
 import { BookPostHandler } from "./api/v1/bookings/book";
 import { BookingPaidPostHandler } from "./api/v1/bookings/paid";
 import { BookingRemovePostHandler } from "./api/v1/bookings/remove";
