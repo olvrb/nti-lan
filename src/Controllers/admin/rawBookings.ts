@@ -8,6 +8,8 @@ export async function RawAdminBookingsGetHandler(req: Request, res: Response) {
         const bookings = await Booking.find();
 
         // We don't mind passing the user's password, as these objects are only used server-side.
+
+        // ^ This is not true.
         res.json(bookings);
     }
 }
