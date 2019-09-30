@@ -55,12 +55,12 @@ export async function BookPostHandler(
         }
         booking.SeatId = seat;
         booking.Type = "seat";
-        booking.Price = 90;
+        booking.Price = 60;
     } else {
         // If the user didn't select a seat, change the type and set the price to 60.
         booking.SeatId = "";
         booking.Type = "entry";
-        booking.Price = 60;
+        booking.Price = 30;
     }
     await booking.save();
     return res.redirect("/user/bookings");

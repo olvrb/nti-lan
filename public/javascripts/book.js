@@ -10,8 +10,8 @@ $("#submit").click((e) => {
     const seatInfo = document.querySelector("#seat");
     modalInfo.innerHTML = `Sittplats: ${
         seatInfo.value ? seatInfo.value : "ingen vald (endast entré)"
-    }`;
-    modalInfo.innerHTML += `<br/>Pris: ${seatInfo.value ? 90 : 60}kr`;
+        }`;
+    modalInfo.innerHTML += `<br/>Pris: ${seatInfo.value ? 60 : 30}kr`;
 });
 
 $("#form").submit((e) => {
