@@ -2,6 +2,7 @@ import { Configuration } from "@config";
 import { Booking } from "@entities/Booking";
 import { NextFunction, Request, Response } from "express";
 import SeatsioClient from "seatsio";
+import { Logger } from "@utilities/Logger";
 
 const client = new SeatsioClient(Configuration.SeatsIO.PrivateKey);
 
@@ -23,10 +24,14 @@ export async function BookingRemovePostHandler(
         }
 
         if (booking.Type === "seat") {
-            await client.events.release(
-                Configuration.SeatsIO.EventKey,
-                booking.SeatId
-            );
+            try {
+                await client.events.release(
+                    Configuration.SeatsIO.EventKey,
+                    booking.SeatId
+                );
+            } catch (e) {
+                Logger.error(e);
+            }
         }
         await booking.remove();
         return res.redirect("/admin/bookings");
