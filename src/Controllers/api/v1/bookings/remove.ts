@@ -1,8 +1,8 @@
 import { Configuration } from "@config";
 import { Booking } from "@entities/Booking";
+import { Logger } from "@utilities/Logger";
 import { NextFunction, Request, Response } from "express";
 import SeatsioClient from "seatsio";
-import { Logger } from "@utilities/Logger";
 
 const client = new SeatsioClient(Configuration.SeatsIO.PrivateKey);
 

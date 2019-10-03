@@ -19,8 +19,6 @@ export async function BookingPaidPostHandler(
     booking.Paid = true;
 
     await booking.save();
-
-    console.log(booking);
     await booking.User.SendEmail(
         `Din bokning är nu <strong style="color: green">betald</strong>.`
     );
