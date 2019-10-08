@@ -21,17 +21,13 @@ export async function SignupPostHandler(
     next: NextFunction
 ) {
     // Deconstruct the object... ES6 is great.
-    const {
+    let {
         email,
         password,
-        nationalId,
         name,
         surname,
         phone,
-        adultPhone,
-        address,
-        postcode,
-        city
+        adultPhone
     } = req.body;
 
     // This is really ugly, but I'm too lazy to fix it. I could probably use the success template...
@@ -41,18 +37,12 @@ export async function SignupPostHandler(
     if (!User.ValidatePassword(password)) {
         return res.status(400).send("ogiltigt lösenord (minst 8 tecken)");
     }
-    if (!User.ValidateNationalId(nationalId)) {
-        return res.status(400).send("ogiltigt personnummer (ÅÅMMDD-XXXX)");
-    }
     if (!User.ValidatePhone(phone) && !User.ValidatePhone(adultPhone)) {
         return res
             .status(400)
             .send(
                 "ogiltigt telefonnummer eller anhörig telefonnummer (ex. 0712345678)"
             );
-    }
-    if (!User.ValidatePostcode(postcode)) {
-        return res.status(400).send("ogiltig postaddress (ex. 11266)");
     }
     const oldUser = await User.findOne({ where: { Email: email } });
 
@@ -64,17 +54,18 @@ export async function SignupPostHandler(
     const user = new User();
     user.Email = email;
     user.Password = User.HashPassword(password);
-    user.NationalId = nationalId;
+    user.NationalId = "";
     user.Name = name;
     user.Surname = surname;
     user.PhoneNumber = phone;
     user.AdultPhoneNumber = adultPhone;
-    user.Address = address;
-    user.Postcode = postcode;
-    user.City = city;
+    user.Address = "";
+    user.Postcode = "";
+    user.City = "";
     user.Bookings = [];
     user.AccessLevel = "pleb";
     user.EmailIsVerified = false;
+
     // Generate a random verification token. randomBytes is cryptographically secure: https://nodejs.org/api/crypto.html#crypto_crypto_randombytes_size_callback
     user.EmailVerificationToken = randomBytes(48).toString("hex");
 
