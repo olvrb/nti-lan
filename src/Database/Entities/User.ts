@@ -119,6 +119,9 @@ export class User extends BaseEntity {
     @Column()
     public City: string;
 
+    @Column({default: ""})
+    public Class: string;
+
     // User can own multiple bookings.
     @OneToMany((type) => Booking, (booking) => booking.User, { lazy: true })
     public Bookings: Booking[];

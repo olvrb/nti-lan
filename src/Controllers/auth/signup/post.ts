@@ -21,13 +21,14 @@ export async function SignupPostHandler(
     next: NextFunction
 ) {
     // Deconstruct the object... ES6 is great.
-    let {
+    const {
         email,
         password,
         name,
         surname,
         phone,
-        adultPhone
+        adultPhone,
+        schoolClass
     } = req.body;
 
     // This is really ugly, but I'm too lazy to fix it. I could probably use the success template...
@@ -64,6 +65,7 @@ export async function SignupPostHandler(
     user.City = "";
     user.Bookings = [];
     user.AccessLevel = "pleb";
+    user.Class = schoolClass;
     user.EmailIsVerified = false;
 
     // Generate a random verification token. randomBytes is cryptographically secure: https://nodejs.org/api/crypto.html#crypto_crypto_randombytes_size_callback
