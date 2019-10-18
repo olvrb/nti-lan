@@ -119,7 +119,7 @@ export class User extends BaseEntity {
     @Column()
     public City: string;
 
-    @Column({default: ""})
+    @Column({ default: "" })
     public Class: string;
 
     // User can own multiple bookings.
@@ -127,7 +127,7 @@ export class User extends BaseEntity {
     public Bookings: Booking[];
 
     // Gotta give some fun names huh.
-    // (Admin has more permissions, such as removing * any * booking etc.pleb is the default, and means a regular user with less permissions.)
+    // (Admin has more permissions, such as removing * any * booking etc. pleb is the default, and means a regular user with less permissions.)
     @Column()
     public AccessLevel: "admin" | "pleb";
 
@@ -163,7 +163,7 @@ export class User extends BaseEntity {
             (resolve, reject) => {
                 this.SendEmail(
                     `Verifiera din email adress: ${req.protocol}://${
-                        req.hostname
+                    req.hostname
                     }/api/v1/email/verify?token=${this.EmailVerificationToken}`
                 )
                     .then(resolve)
