@@ -17,6 +17,7 @@ import { VerifyPostHandler } from "./auth/verify/post";
 import { BookGetHandler } from "./book/get";
 import { IndexHandler } from "./Index.controller";
 import { UserBookingsGetHandler } from "./user/bookings";
+import { AdminGenerateSheetsGetHandler } from "./admin/generateSheet";
 
 export function BindControllers() {
     Logger.info("Binding controllers.");
@@ -46,6 +47,9 @@ export function BindControllers() {
 
     app.get("/auth/verify", VerifyGetHandler);
     app.post("/auth/verify", VerifyPostHandler);
+
+
+    app.get("/admin/generateSheets", AdminGenerateSheetsGetHandler);
 
     // app.use(E404Handler);
     app.use((err, req, res, next) => {
