@@ -12,6 +12,7 @@
 <body>
     <%- include("../topbar") %>
     <h2 class="col-auto">Admin stuff</h2>
+    <h2><a href="/admin/generateSheets">Get csv</a></h2>
     <p><%= bookings.length %> bookings, <%= bookings.filter(x => x.Paid).length %> paid</p>
     <p><%= bookings.filter(x => x.SeatId === "").length %> bokade inträde,
         <%= bookings.filter(x => x.SeatId !== "").length %>

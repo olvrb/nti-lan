@@ -2,6 +2,7 @@ import { Configuration } from "@config";
 import { app } from "../Index";
 import { Logger } from "../Utilities/Logger";
 import { AdminBookingsGetHandler } from "./admin/bookings";
+import { AdminGenerateSheetsGetHandler } from "./admin/generateSheet";
 // import { RawAdminBookingsGetHandler } from "./admin/rawBookings";
 import { BookPostHandler } from "./api/v1/bookings/book";
 import { BookingPaidPostHandler } from "./api/v1/bookings/paid";
@@ -46,6 +47,9 @@ export function BindControllers() {
 
     app.get("/auth/verify", VerifyGetHandler);
     app.post("/auth/verify", VerifyPostHandler);
+
+
+    app.get("/admin/generateSheets", AdminGenerateSheetsGetHandler);
 
     // app.use(E404Handler);
     app.use((err, req, res, next) => {
