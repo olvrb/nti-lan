@@ -10,7 +10,7 @@ export async function AdminGenerateSheetsGetHandler(req: Request, res: Response)
         const formattedCsvData = bookings.map(x => `${x.User.Name}, ${x.User.Surname}, ${x.SeatId}, ${x.Paid}`);
 
 
-        let csv = `Name, Surname, SeatId, Paid\n${formattedCsvData.join("\n")}`;
+        const csv = `Name, Surname, SeatId, Paid\n${formattedCsvData.join("\n")}`;
         res.setHeader('Content-disposition', 'attachment; filename=result.csv');
         res.setHeader('Content-type', 'text/csv');
 

@@ -2,6 +2,7 @@ import { Configuration } from "@config";
 import { app } from "../Index";
 import { Logger } from "../Utilities/Logger";
 import { AdminBookingsGetHandler } from "./admin/bookings";
+import { AdminGenerateSheetsGetHandler } from "./admin/generateSheet";
 // import { RawAdminBookingsGetHandler } from "./admin/rawBookings";
 import { BookPostHandler } from "./api/v1/bookings/book";
 import { BookingPaidPostHandler } from "./api/v1/bookings/paid";
@@ -17,7 +18,6 @@ import { VerifyPostHandler } from "./auth/verify/post";
 import { BookGetHandler } from "./book/get";
 import { IndexHandler } from "./Index.controller";
 import { UserBookingsGetHandler } from "./user/bookings";
-import { AdminGenerateSheetsGetHandler } from "./admin/generateSheet";
 
 export function BindControllers() {
     Logger.info("Binding controllers.");
